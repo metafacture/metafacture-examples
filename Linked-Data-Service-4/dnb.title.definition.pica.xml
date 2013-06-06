@@ -1,0 +1,1010 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" entityMarker="." version="1">
+	<meta>
+		<name>Umsetzung der DNB-Titeldaten - Version 1.4 (LDS4)</name>
+	</meta>
+	<rules>
+
+		<data name="*rdf:type" source="002@.0">
+			<substring start="0" end="1" />
+			<not-equals string="l" />
+			<lookup in="Bibliografische Erscheinungsform_Pos1" />
+		</data>
+		
+		<data name="*rdf:type" source="002@.0">
+			<substring start="1" end="2" />
+			<not-equals string="l" />
+			<lookup in="Bibliografische Erscheinungsform_Pos2" />
+		</data>
+
+		<combine name="*rdf:type" value="${format}">
+			<data source="002@.0">
+				<substring start="1" end="2" />
+				<equals string="l" />
+			</data>
+			<data source="017A.a" name="format">
+				<lookup in="zeitschr." />
+			</data>
+		</combine>
+
+		<data name="*dcterms:medium" source="002@.0">
+			<substring start="0" end="1" />
+			<lookup in="Bibliografische Erscheinungsform_Pos2_2" />
+		</data>
+		
+		<data source="003@.0" name="~rdf:about" >
+			<occurrence only="1"/>
+			<compose prefix="http://d-nb.info/" />
+		</data>
+		
+		<choose name="@isbd:P1018_TAIL">
+			<data source="011@.b">
+				<compose prefix="-" />
+			</data>
+			<data source="002@.0">
+				<regexp match="^.[bd]" />
+				<constant value="-" />
+			</data>
+		</choose>
+		<combine name="dcterms:issued" value="${publicationDate}${tail}"
+			flushWith="record">
+			<data source="011@.a" name="publicationDate" />
+			<data source="@isbd:P1018_TAIL" name="tail" />
+		</combine>
+
+		<group name="bibo:issn">
+			<data source="005I.0" />
+			<data source="005A.0" />
+		</group>
+
+		<data source="004K.0" name="bibo:gtin14" />
+		<data source="004U.0" name="*umbel:isLike" >
+			<compose prefix="http://nbn-resolving.de/" />
+		</data>
+		<data source="004P.0" name="*umbel:isLike">
+			<compose prefix="http://dx.doi.org/" />
+		</data>
+		<data source="004R.0" name="*umbel:isLike">
+			<compose prefix="http://hdl.handle.net/" />
+		</data>
+		<data source="007C.0" name="bibo:coden" />
+		<!-- Die EKI soll auf die Repräsentation im Dienst culturegraph.org verweisen. 
+			Derzeit ist die Synthax dort noch nicht abschließend geklärt, daher ist die 
+			aktuelle Umsetzung ausdrücklich als Platzhalter zu verstehen. <data source="007G.0" 
+			name="owl:sameAs" > <compose prefix="http://www.culturegraph.org/EKI/" /></data> -->
+
+		<data name="*owl:sameAs" source="003@.0">
+			<compose prefix="http://hub.culturegraph.org/resource/DNB-" />
+		</data>
+		
+		<group name="dc:identifier">
+			<data source="007Ha.0">
+				<compose prefix="(DE-602)" />
+			</data>
+
+			<data source="007Hd.0">
+				<compose prefix="(DE-605)" />
+			</data>
+
+			<data source="007He.0">
+				<compose prefix="(DE-603)" />
+			</data>
+			<data source="007Hf.0">
+				<compose prefix="(DE-576)" />
+			</data>
+			<data source="007Hg.0">
+				<compose prefix="(DE-604)" />
+			</data>
+
+			<data source="007Hh.0">
+				<compose prefix="(DE-601)" />
+			</data>
+
+			<data source="006Z.0">
+				<compose prefix="(DE-600)" />
+			</data>
+
+			<data source="007Ib.0">
+				<compose prefix="(Uk)" />
+			</data>
+
+			<data source="007Ic.0">
+				<compose prefix="(ItFic)" />
+			</data>
+			<data source="007Ig.0">
+				<compose prefix="(FrPBN)" />
+			</data>
+			<data source="007Il.0">
+				<compose prefix="(DLC)" />
+			</data>
+
+			<data source="007Io.0">
+				<compose prefix="(OColc)" />
+			</data>
+		</group>
+
+		<combine name="*dcterms:accrualPeriodicity" value="${value}">
+			<data source="018@.a" name="value">
+				<lookup in="018AT_values_map" />
+				<compose prefix="http://marc21rdf.info/terms/continuingfre%23"/>
+			</data>
+		</combine>
+
+		<data source="022A.01.a" name="dcterms:alternative" />
+
+		<combine name="dcterms:alternative" value="${einheitstitel}${sprachbez}"
+			flushWith="022A">
+			<data source="022A.a" name="einheitstitel">
+				<replace pattern="@" with="" />
+			</data>
+			<data source="022A.r" name="sprachbez">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+
+
+		<data source="026C.a" name="bibo:shortTitle" />
+
+		<data source="021A.f" name="dcterms:alternative">
+			<replace pattern="@" with="" />
+		</data>
+
+		<choose flushWith="021A">
+			<combine name="dc:title" value="${value}">
+				<data source="021A.9" name="onlyIfExists">				
+					<!-- will only be present if 021A.9 exists-->
+				</data>
+				<data source="021A.Y" name="value"/>
+			</combine>
+			<data source="021A.a" name="dc:title">
+				<replace pattern="@" with="" />
+			</data>
+		</choose>
+
+		<combine name="@otherTitleInformation" value="${lValue}${aValue}${dValue}${rValue}" flushWith="021B" reset="true">
+			<data source="021B.l" name="lValue"/>
+			<data source="021B.a" name="aValue">
+				<compose prefix=" "/>
+			</data>
+			<data source="021B.d" name="dValue">
+				<compose prefix=" : "/>
+			</data>
+			<data source="021B.r" name="rValue"/>
+		</combine>
+		<choose>
+			<combine name="rda:otherTitleInformation" value="${value}" >
+				<data source="021A.9" name="onlyIfExists">
+					<!-- rda:otherTitleInformation will only be present if 021A.9 exists-->
+				</data>
+				<concat delimiter=" ; " name="value">
+					<data source="@otherTitleInformation"/>
+				</concat>
+			</combine>	
+			<data source="021A.d" name="rda:otherTitleInformation">
+				<replace pattern="@" with="" />
+			</data>	
+		</choose>
+
+		<combine name="@required021CValues" value="${reihenBezeichnung}${titelUnterreihe}${zusatzUnterreihe}${text}" flushWith="record">
+			<data source="021C.l" name="reihenBezeichnung">
+				<replace pattern="@" with="" />
+				<compose prefix=" / " />
+			</data>
+			<data source="021C.a" name="titelUnterreihe">
+				<replace pattern="@" with="" />
+				<compose prefix=", " />
+			</data>
+			<data source="021C.d" name="zusatzUnterreihe">
+				<compose prefix=" : " />
+			</data>
+			<data source="021C.r" name="text">
+				<replace pattern="@" with="" />
+				<compose prefix=" / " />
+			</data>
+		</combine>
+		<combine name="dcterms:title" value="${hst}${021CValues}">
+			<data source="021A.a" name="hst">
+				<replace pattern="@" with="" />
+			</data>
+			<data source="@required021CValues" name="021CValues"/>			
+		</combine>
+		
+		<combine name="*dcterms:language" value="${languageUri}">
+			<data source="010@.a" name="languageUri">
+				<compose prefix="http://id.loc.gov/vocabulary/iso639-2/"/>
+			</data>
+		</combine>
+
+		<data source="004A.0" name="@cleanIsbn">
+			<isbn to="clean" />
+		</data>
+		<data source="@cleanIsbn" name="bibo:isbn10">
+			<regexp match="^\d{10,10}$" />
+		</data>		
+		<data source="@cleanIsbn" name="bibo:isbn13">
+			<regexp match="^\d{13,13}$" />
+		</data>
+
+
+<!-- ListElements -->
+	<!-- 028A -->
+		<combine name="@shortName028A" value="${personalname}${qualifier}" sameEntity="true">
+			<data source="028A.5" name="personalname">
+				<replace pattern="@" with="" />
+			</data>
+			<data source="028A.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>		
+		</combine>
+		<combine name="@longName028A" value="${surname}${forename}${prefix}${qualifier}" flushWith="028A" sameEntity="true">
+			<data source="028A.a" name="surname" />
+			<data source="028A.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028A.c" name="prefix">
+				<compose prefix=" /" />
+			</data>
+			<data source="028A.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+		
+		<choose flushWith="028A">
+	<!-- 028A References -->
+			<combine name="@dcterms_contributor_ref" value="${value}">
+				<data source="028A.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>
+			</combine>
+			<combine name="@dc_creator_ref" value="${value}">
+				<data source="028A.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+			</combine>
+			<!-- 028A shortName -->			
+			<combine name="@dc_creator" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[^bdp].*"/>
+				</data>	
+				<data source="@shortName028A" name="value"/>
+			</combine>
+			<combine name="@dc_contributor" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>				
+				<data source="@shortName028A" name="value"/>
+			</combine>
+	<!-- 028A longName -->
+			<combine name="@dc_creator" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[^bdp].*"/>
+				</data>	
+				<data source="@longName028A" name="value"/>
+			</combine>
+			<combine name="@dc_contributor" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>				
+				<data source="@longName028A" name="value"/>
+			</combine>
+		</choose>
+		
+	<!-- 028B -->
+		<combine name="@shortName028B" value="${personalname}${qualifier}" sameEntity="true">
+			<data source="028B.5" name="personalname">
+				<replace pattern="@" with="" />
+			</data>
+			<data source="028B.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>		
+		</combine>
+		<combine name="@longName028B" value="${surname}${forename}${prefix}${qualifier}" flushWith="028B" sameEntity="true">
+			<data source="028B.a" name="surname" />
+			<data source="028B.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028B.c" name="prefix">
+				<compose prefix=" /" />
+			</data>
+			<data source="028B.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+		<choose flushWith="028B">
+	<!-- 028B References -->
+			<combine name="@dcterms_contributor_ref" value="${value}">
+				<data source="028B.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>
+			</combine>
+			<combine name="@dc_creator_ref" value="${value}">
+				<data source="028B.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+			</combine>
+	<!-- 028B shortName -->
+			<combine name="@dc_creator" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[^bdp].*"/>
+				</data>	
+				<data source="@shortName028B" name="value"/>
+			</combine>
+			<combine name="@dc_contributor" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>				
+				<data source="@shortName028B" name="value"/>
+			</combine>
+	<!-- 028B longName -->
+			<combine name="@dc_creator" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[^bdp].*"/>
+				</data>	
+				<data source="@longName028B" name="value"/>
+			</combine>
+			<combine name="@dc_contributor" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>				
+				<data source="@longName028B" name="value"/>
+			</combine>
+		</choose>
+
+	<!-- contributor and similar occurences -->
+	<!-- 028C -->
+		<combine name="@shortName028C" value="${personalname}${qualifier}" sameEntity="true">
+			<data source="028C.5" name="personalname" />
+			<data source="028C.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+		<combine name="@longName028C" value="${surname}${forename}${prefix}${qualifier}" flushWith="028C" sameEntity="true">
+			<data source="028C.a" name="surname" />
+			<data source="028C.d" name="forename">
+				<compose prefix=", " />
+			</data>
+			<data source="028C.c" name="prefix">
+				<compose prefix=" /" />
+			</data>
+			<data source="028C.l" name="qualifier">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+
+		<combine name="@028C_B_value" value="${value}" flushWith="028C" reset="true">
+			<data source="028C.B" name="value">
+				<lookup default="dc:contributor" in="028C_B_values_map"/>
+			</data>	
+		</combine>
+		<choose flushWith="028C">
+	<!-- 028C References -->
+			<combine name="@dcterms_contributor_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="dc:contributor"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_edt_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:edt"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_ant_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ant"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_ill_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ill"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_cmp_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:cmp"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_ctb_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ctb"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_red_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:red"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_trl_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:trl"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_rcp_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="@028C_B_value">
+					<regexp match="marcRole:rcp"/>
+				</data>
+			</combine>
+			<combine name="@marc_role_cre_ref" value="${value}" reset="true">
+				<data source="028C.9" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+			</combine>
+	<!-- 028C shortName -->
+			<combine name="@dc_contributor" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="dc:contributor"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_edt" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:edt"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ant" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ant"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ill" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ill"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_cmp" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:cmp"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ctb" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ctb"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_red" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:red"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_trl" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:trl"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_rcp" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:rcp"/>
+				</data>
+				<data source="@shortName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_cre" value="${value}" reset="true">
+				<data source="@shortName028C" name="value"/>
+			</combine>
+	<!-- 028C longName -->						
+			<combine name="@dc_contributor" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="dc:contributor"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_edt" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:edt"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ant" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ant"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ill" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ill"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_cmp" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:cmp"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_ctb" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:ctb"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_red" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:red"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_trl" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:trl"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_rcp" value="${value}" reset="true">
+				<data source="@028C_B_value">
+					<regexp match="marcRole:rcp"/>
+				</data>
+				<data source="@longName028C" name="value"/>
+			</combine>
+			<combine name="@marc_role_cre" value="${value}" reset="true">
+				<data source="@longName028C" name="value"/>
+			</combine>
+		</choose>
+
+	<!-- 029A -->	
+		<combine name="@longValue029A" value="${name}${qualifierMainCorporatebody}${division}${qualifierDivision}" flushWith="029A" sameEntity="true">
+			<data source="029A.a" name="name">
+				<replace pattern="@" with="" />
+			</data>
+			<data source="029A.c" name="qualifierMainCorporatebody">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="029A.b" name="division">
+				<replace pattern="@" with="" />
+				<compose prefix=" / " />
+			</data>
+			<data source="029A.x" name="qualifierDivision">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+		</combine>
+		
+		<choose flushWith="029A">
+	<!-- 029A References -->
+			<combine name="@dcterms_contributor_ref" value="${value}">
+				<data source="029A.0" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>
+			</combine>
+			<combine name="@dc_creator_ref" value="${value}">
+				<data source="029A.0" name="value">
+					<compose prefix="http://d-nb.info/gnd/" />
+				</data>
+			</combine>
+	<!-- 029A longValue -->					
+			<combine name="@dc_creator" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[^bdp].*"/>
+				</data>	
+				<data source="@longValue029A" name="value"/>
+			</combine>
+			<combine name="@dc_contributor" value="${value}">
+				<data source="002@.0">
+					<regexp match="^.[bdp].*"/>
+				</data>				
+				<data source="@longValue029A" name="value"/>
+			</combine>
+		</choose>
+
+	<!-- 029F -->
+		<choose flushWith="029F">
+	<!-- 029F References -->
+			<data source="029F.0" name="@dcterms_contributor_ref">
+				<compose prefix="http://d-nb.info/gnd/" />
+			</data>
+	<!-- 029F longValue -->
+			<combine name="@dc_contributor"
+				value="${name}${qualifierMainCorporatebody}${division}${qualifierDivision}"
+				flushWith="029F" reset="true">
+				<data source="029F.a" name="name" />
+				<data source="029F.c" name="qualifierMainCorporatebody">
+					<compose prefix=" &lt;" postfix="&gt;" />
+				</data>
+				<data source="029F.b" name="division">
+					<compose prefix=" / " />
+				</data>
+				<data source="029F.x" name="qualifierDivision">
+					<compose prefix=" &lt;" postfix="&gt;" />
+				</data>
+			</combine>
+		</choose>
+
+	<!-- Element-Name Mapping  -->
+		<data name="dc:creator" source="@dc_creator" />
+		<data name="*dcterms:creator" source="@dc_creator_ref" />
+		
+		<data name="dc:contributor" source="@dc_contributor" />
+		<data name="*dcterms:contributor" source="@dcterms_contributor_ref" />
+		
+		<data name="marcRole:cre" source="@marc_role_cre" />
+		<data name="*marcRole:cre" source="@marc_role_cre_ref" />
+		
+		<data name="marcRole:edt" source="@marc_role_edt" />
+		<data name="*marcRole:edt" source="@marc_role_edt_ref" />
+		
+		<data name="marcRole:ant" source="@marc_role_ant" />
+		<data name="*marcRole:ant" source="@marc_role_ant_ref" />
+		
+		<data name="marcRole:ill" source="@marc_role_ill" />
+		<data name="*marcRole:ill" source="@marc_role_ill_ref" />
+		
+		<data name="marcRole:cmp" source="@marc_role_cmp" />
+		<data name="*marcRole:cmp" source="@marc_role_cmp_ref" />
+		
+		<data name="marcRole:ctb" source="@marc_role_ctb" />
+		<data name="*marcRole:ctb" source="@marc_role_ctb_ref" />
+		
+		<data name="marcRole:red" source="@marc_role_red" />
+		<data name="*marcRole:red" source="@marc_role_red_ref" />
+		
+		<data name="marcRole:trl" source="@marc_role_trl" />
+		<data name="*marcRole:trl" source="@marc_role_trl_ref" />
+		
+		<data name="marcRole:rcp" source="@marc_role_rcp" />
+		<data name="*marcRole:rcp" source="@marc_role_rcp_ref" />						
+		
+
+
+	<!-- Aufbau der Listen -->
+		<entity name="bibo:authorList" flushWith="record">
+			<entity name="rdf:Seq" flushWith="record">
+				<data name="*rdf:li" source="@dc_creator_ref" />
+				<data name="rdf:li" source="@dc_creator" />
+			</entity>
+		</entity>
+		<entity name="bibo:contributorList" flushWith="record">
+			<entity name="rdf:Seq" flushWith="record">
+				<data name="rdf:li" source="@dc_contributor" />
+				<data name="*rdf:li" source="@dcterms_contributor_ref" />
+				<data name="rdf:li" source="@marc_role_cre" />
+				<data name="*rdf:li" source="@marc_role_cre_ref" />
+				<data name="rdf:li" source="@marc_role_edt" />
+				<data name="*rdf:li" source="@marc_role_edt_ref" />
+				<data name="rdf:li" source="@marc_role_ant" />
+				<data name="*rdf:li" source="@marc_role_ant_ref" />
+				<data name="rdf:li" source="@marc_role_ill" />
+				<data name="*rdf:li" source="@marc_role_ill_ref" />
+				<data name="rdf:li" source="@marc_role_cmp" />
+				<data name="*rdf:li" source="@marc_role_cmp_ref" />
+				<data name="rdf:li" source="@marc_role_ctb" />
+				<data name="*rdf:li" source="@marc_role_ctb_ref" />
+				<data name="rdf:li" source="@marc_role_red" />
+				<data name="*rdf:li" source="@marc_role_red_ref" />
+				<data name="rdf:li" source="@marc_role_trl" />
+				<data name="*rdf:li" source="@marc_role_trl_ref" />
+				<data name="rdf:li" source="@marc_role_rcp" />
+				<data name="*rdf:li" source="@marc_role_rcp_ref" />													
+			</entity>
+		</entity>
+		
+	<!--ENDE: Aufbau der Listen -->
+<!-- ENDE: ListElements -->
+
+
+		<data source="021A.9" name="*dcterms:isPartOf">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+
+		<combine name="bibo:issue" value="${value}">
+			<choose name="value">
+				<combine name="redundantName1" value="${valueD}.${valueJ}, ${valueE}">
+					<data source="031A.d" name="valueD" />
+					<data source="031A.e" name="valueE" />
+					<data source="031A.j" name="valueJ" />
+				</combine>
+				<combine name="redundantName2" value="${valueJ}-${valueC}-${valueB}">
+					<data source="031A.c" name="valueC" />
+					<data source="031A.b" name="valueB" />
+					<data source="031A.j" name="valueJ" />
+				</combine>
+			</choose>
+		</combine>
+
+		<data source="031A.h" name="bibo:pageStart">
+			<replace pattern="-.*" with="" />
+		</data>
+		<data source="031A.h" name="bibo:pageEnd">
+			<replace pattern=".*-" with="" />
+		</data>
+
+		<data source="031A.i" name="dcterms:extent">
+			<compose postfix=" S." />
+		</data>
+
+		<combine name="isbd:P1053" value="${value}">
+			<data source="034D.a" name="value" />
+			<data source="002@.0">
+				<regexp match="^[^O].*" />
+			</data>
+		</combine>
+
+		<data source="009Q.u" name="foaf:isPrimaryTopicOf">
+			<replace pattern=" " with="" />
+		</data>
+
+		<choose>
+			<data source="036F.9" name="*dcterms:isPartOf">
+				<compose prefix="http://d-nb.info/"/>
+			</data>
+			<data source="036F.a" name="dcterms:isPartOf"/>
+		</choose>
+
+		<data source="036D.9" name="*dcterms:isPartOf">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+
+		<data source="036D.a" name="dcterms:isPartOf" />
+
+		<combine name="${name}" value="${value}" reset="true">
+			<choose name="value" flushWith="036D">
+				<combine name="redundantNameD" value="${valueD} ; ${valueL}"
+					sameEntity="true">
+					<data source="036D.D" name="valueD" />
+					<data source="036D.l" name="valueL" />
+				</combine>
+				<combine name="redundantNameY" value="${valueY} ; ${valueL}"
+					sameEntity="true">
+					<data source="036D.Y" name="valueY" />
+					<data source="036D.l" name="valueL" />
+				</combine>
+				<combine name="redundantNameA" value="${valueA} ; ${valueL}"
+					sameEntity="true">
+					<data source="036D.a" name="valueA" />
+					<data source="036D.l" name="valueL" />
+				</combine>
+			</choose>
+
+			<choose flushWith="036D"  name="name">
+				<data source="036D.g">
+					<substring start="1" />
+					<lookup>
+						<entry name="bvz" value="bibo:issue" />
+						<entry name="c" value="dcterms:bibliographicCitation" />
+					</lookup>
+				</data>
+<!-- 				<data source="036D.l"> -->
+<!-- 					<constant value="bibo:volume"/> -->
+<!-- 				</data> -->
+			</choose>
+
+		</combine>
+
+		<choose name="dcterms:bibliographicCitation" flushWith="036F">
+			<combine name="redundantNameD" value="${valueD} ; ${valueL}"
+				sameEntity="true">
+				<data source="036F.D" name="valueD" />
+				<data source="036F.l" name="valueL" />
+			</combine>
+			<combine name="redundantNameY" value="${valueY} ; ${valueL}"
+				sameEntity="true">
+				<data source="036F.Y" name="valueY" />
+				<data source="036F.l" name="valueL" />
+			</combine>
+			<combine name="redundantNameA" value="${valueA} ; ${valueL}"
+				sameEntity="true">
+				<data source="036F.a" name="valueA" />
+				<data source="036F.l" name="valueL" />
+			</combine>
+		</choose>
+
+		<data source="036G.a" name="dcterms:isPartOf">
+			<replace pattern="@" with="" />
+		</data>
+
+		<data source="037C.a" name="rda:dissertationOrThesisInformation" />
+		<data source="046C.a" name="dcterms:alternative">
+			<replace pattern="@" with="" />
+		</data>
+		<data source="039B.9" name="*dcterms:isPartOf">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+		<data source="039C.9" name="*dcterms:hasPart">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+		<data source="039D.9" name="*dcterms:isFormatOf">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+		<data source="039D.9" name="*dc:relation">
+			<compose prefix="http://d-nb.info/" />
+		</data>
+		<combine name="*rda:succeededBy" value="${value}" sameEntity="true">
+			<data source="039E.9" name="value">
+				<compose prefix="http://d-nb.info/" />
+			</data>
+			<data source="039E.b">
+				<regexp match="^[sz]$" />
+			</data>
+		</combine>
+		<combine name="*rda:precededBy" value="${value}" sameEntity="true">
+			<data source="039E.9" name="value">
+				<compose prefix="http://d-nb.info/" />
+			</data>
+			<data source="039E.b">
+				<regexp match="^[fz]$" />
+			</data>
+		</combine>
+
+		<data source="041A.0" name="*dcterms:subject">
+			<compose prefix="http://d-nb.info/gnd/"/>
+		</data>
+
+<!-- 		<data source="045F.a" name="dc:subject"> -->
+<!-- 			<compose prefix="(DDC)" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045G.a" name="dcterms:subject"> -->
+<!-- 			<compose prefix="(DDC)" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045H.a" name="dcterms:subject"> -->
+<!-- 			<compose prefix="(DDC)" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045I.a" name="dcterms:subject"> -->
+<!-- 			<compose prefix="(DDC)" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045J.a" name="dcterms:subject"> -->
+<!-- 			<compose prefix="(DDC)" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045E.e" name="*dc:subject"> -->
+<!-- 			<compose prefix="http://d-nb.info/ddc-sg/" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045E.f" name="*dc:subject"> -->
+<!-- 			<compose prefix="http://d-nb.info/ddc-sg/" /> -->
+<!-- 		</data> -->
+<!-- 		<data source="045U.e" name="*dc:subject"> -->
+<!-- 			<compose prefix="http://d-nb.info/ddc-sg/" /> -->
+<!-- 		</data> -->
+		<data source="033A.n" name="dc:publisher">
+			<replace pattern="@" with="" />
+		</data>
+		<data source="033A.p" name="rda:placeOfPublication">
+			<replace pattern="@" with="" />
+		</data>
+		<combine name="rda:publicationStatement" value="${33Ap}${33An}${11ATa}">
+			<data source="033A.p" name="33Ap" />
+			<data source="033A.n" name="33An">
+				<compose prefix=" : "/>
+			</data>
+			<data source="011@.a" name="11ATa">
+				<compose prefix=", "/>
+			</data>
+		</combine>
+		
+		<combine name="@tableOfContents" value="${value}" sameEntity="true">
+			<data source="047I.c">
+				<regexp match="^04$"/>
+			</data>
+			<data source="047I.d">
+				<regexp match="^DNB$"/>
+			</data>
+		</combine>		
+		<combine name="*dcterms:tableOfContents" value="${value}">
+			<data source="@tableOfContents"/>
+			<data source="003@.0" name="value">
+				<compose prefix="http://d-nb.info/"/>
+				<compose postfix="/04"/>
+			</data>	
+		</combine>
+		
+		<data source="006Z.0" name="*umbel:isLike">
+			<compose prefix="http://ld.zdb-services.de/data/"/>
+		</data>
+	</rules>
+	<maps>
+		<map name="Bibliografische Erscheinungsform_Pos1">
+			<entry name="B" value="http://purl.org/ontology/bibo/AudioVisualDocument"/>
+			<entry name="C" value="http://purl.org/library/BrailleBook"/>
+			<entry name="K" value="http://purl.org/ontology/bibo/Map"/>
+		</map>
+
+		<map name="Bibliografische Erscheinungsform_Pos2">
+			<entry name="a" value="http://purl.org/ontology/bibo/Document" />
+			<entry name="b" value="http://purl.org/ontology/bibo/Periodical" />
+			<entry name="c" value="http://purl.org/ontology/bibo/Collection" />
+			<entry name="d" value="http://purl.org/ontology/bibo/Series" />
+			<entry name="E" value="http://purl.org/ontology/bibo/Collection" />
+			<entry name="f" value="http://purl.org/ontology/bibo/Document" />
+			<entry name="F" value="http://purl.org/ontology/bibo/Document" />
+			<entry name="p" value="http://purl.org/ontology/bibo/Periodical" />
+		</map>
+		
+		<map name="Bibliografische Erscheinungsform_Pos2_2">
+			<entry name="E" value="http://rdvocab.info/termList/RDAMediaType/1002" />
+			<entry name="A" value="http://rdvocab.info/termList/RDACarrierType/1044" />
+			<entry name="O" value="http://rdvocab.info/termList/RDACarrierType/1018" />
+			<entry name="S" value="http://rdvocab.info/termList/RDAMediaType/1003" />
+			<entry name="Z" value="http://iflastandards.info/ns/isbd/terms/mediatype/T1008" />
+		</map>
+
+<!-- 		<map name="namespaces"> -->
+<!-- 			<entry name="" value="http://d-nb.info/" /> -->
+<!-- 			<entry name="rdf" value="http://www.w3.org/1999/02/22-rdf-syntax-ns#" /> -->
+<!-- 			<entry name="rdfs" value="http://www.w3.org/2000/01/rdf-schema#" /> -->
+<!-- 			<entry name="owl" value="http://www.w3.org/2002/07/owl#" /> -->
+<!-- 			<entry name="dcterms" value="http://purl.org/dc/terms/" /> -->
+<!-- 			<entry name="dc" value="http://purl.org/dc/elements/1.1/" /> -->
+<!-- 			<entry name="isbd" value="http://iflastandards.info/ns/isbd/elements/" /> -->
+<!-- 			<entry name="bibo" value="http://purl.org/ontology/bibo/" /> -->
+<!-- 			<entry name="foaf" value="http://xmlns.com/foaf/0.1/" /> -->
+<!-- 			<entry name="rda" value="http://rdvocab.info/"/> -->
+<!-- 		</map> -->
+
+		<map name="listelements">
+			<entry name="bibo:authorList" value="" />
+			<entry name="bibo:contributorList" value="" />
+		</map>
+
+		<map name="zeitschr.">
+			<entry name="lf" value="http://purl.org/ontology/bibo/Issue" />
+			<entry name="at" value="http://purl.org/ontology/bibo/Article" />
+		</map>
+		
+		<map name="028C_B_values_map">
+			<entry name="Hrsg." value="marcRole:edt"/>
+			<entry name="Bearb." value="marcRole:edt"/>
+			<entry name="Begr." value="marcRole:ant"/>
+			<entry name="Ill." value="marcRole:ill"/>
+			<entry name="Komp." value="marcRole:cmp"/>
+			<entry name="Mitarb." value="marcRole:ctb"/>
+			<entry name="Red." value="marcRole:red"/>
+			<entry name="Übers." value="marcRole:trl"/>
+			<entry name="Adressat." value="marcRole:rcp"/>
+		</map>
+		
+		<map default="u" name="018AT_values_map">
+			<entry name="a" value="a"/>
+			<entry name="b" value="b"/>
+			<entry name="c" value="c"/>
+			<entry name="d" value="d"/>
+			<entry name="e" value="b"/>
+			<entry name="f" value="f"/>
+			<entry name="g" value="g"/>
+			<entry name="h" value="h"/>
+			<entry name="m" value="m"/>
+			<entry name="q" value="q"/>
+			<entry name="s" value="s"/>
+			<entry name="t" value="i"/>
+			<entry name="w" value="w"/>
+			<entry name="z" value="%23"/>
+		</map>
+	</maps>
+</metamorph>
