@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+	<!-- 548 datv -->
+	<combine name="${name}" value="${value}" reset="true"
+		sameEntity="true">
+		<data source="060R.4" name="name">
+			<lookup>
+				<entry name="datu" value="gnd:udkCode" />
+			</lookup>
+		</data>
+		<combine name="value" value="${a}" reset="true" sameEntity="true">
+			<data source="060R.a" name="a">
+				<lookup>
+					<entry name="v3" value="- 3000 v. Chr." />
+					<entry name="v2" value="3000 - 2001 v. Chr." />
+					<entry name="v1" value="2000 - 1001 v. Chr." />
+					<entry name="v09" value="1000 - 901 v. Chr. " />
+					<entry name="v08" value="900 - 801 v. Chr. " />
+					<entry name="v07" value="800 - 701 v. Chr. " />
+					<entry name="v06" value="700 - 601 v. Chr. " />
+					<entry name="v05" value="600 - 501 v. Chr. " />
+					<entry name="v04" value="500 - 401 v. Chr. " />
+					<entry name="v03" value="400 - 301 v. Chr. " />
+					<entry name="v02" value="300 - 201 v. Chr. " />
+					<entry name="v01" value="200 - 101 v. Chr. " />
+					<entry name="v00" value="100 - 1 v. Chr. " />
+					<entry name="00" value="1 - 100 n. Chr." />
+					<entry name="01" value="101 - 200" />
+					<entry name="02" value="201 - 300" />
+					<entry name="03" value="301 - 400" />
+					<entry name="04" value="401 - 500" />
+					<entry name="05" value="501 - 600" />
+					<entry name="06" value="601 - 700" />
+					<entry name="07" value="701 - 800" />
+					<entry name="08" value="801 - 900" />
+					<entry name="09" value="901 - 1000" />
+					<entry name="10" value="1001 - 1100" />
+					<entry name="11" value="1101 - 1200" />
+					<entry name="12" value="1201 - 1300" />
+					<entry name="13" value="1301 - 1400" />
+					<entry name="14" value="1401 - 1500" />
+					<entry name="15" value="1501 - 1600" />
+					<entry name="16" value="1601 - 1700" />
+					<entry name="17" value="1701 - 1800" />
+					<entry name="180" value="1801 - 1810" />
+					<entry name="181" value="1811 - 1820" />
+					<entry name="182" value="1821 - 1830" />
+					<entry name="183" value="1831 - 1840" />
+					<entry name="184" value="1841 - 1850" />
+					<entry name="185" value="1851 - 1860" />
+					<entry name="186" value="1861 - 1870" />
+					<entry name="187" value="1871 - 1880" />
+					<entry name="188" value="1881 - 1890" />
+					<entry name="189" value="1891 - 1900" />
+					<entry name="190" value="1901 - 1910" />
+					<entry name="191" value="1911 - 1920" />
+					<entry name="192" value="1921 - 1930" />
+					<entry name="193" value="1931 - 1940" />
+					<entry name="194" value="1941 - 1950" />
+					<entry name="195" value="1951 - 1960" />
+					<entry name="196" value="1961 - 1970" />
+					<entry name="197" value="1971 - 1980" />
+					<entry name="198" value="1981 - 1990" />
+					<entry name="199" value="1991 - 2000" />
+					<entry name="200" value="2001 - " />
+				</lookup>
+			</data>
+		</combine>
+	</combine>
+</rules>

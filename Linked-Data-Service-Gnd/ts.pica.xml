@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph" xmlns:xi="http://www.w3.org/2001/XInclude"
+	entityMarker="." version="1">
+
+		<meta>
+		<name>Umsetzung für Schlagwörter Version 1.2</name>
+	</meta>
+
+	<rules>
+		<data source="007K.0" name="*foaf:page">
+			<lookup in="wikip" />
+			<compose prefix="http://de.wikipedia.org/wiki/" />
+		</data>
+
+<data source="007K.0" name="@stw">
+			<lookup in="stw" />
+		</data>
+
+		<combine name="*skos:${rel}" value="${val}">
+			<data source="@stw" name="rel">
+				<regexp match="(.*skos:)(.*)" format="${2}" />
+			</data>
+			<data source="@stw" name="val">
+				<regexp match="(\d*-\d)" format="${1}" />
+				<compose prefix="http://zbw.eu/stw/descriptor/" />
+			</data>
+		</combine>
+		
+		<!-- about attribute -->
+		<data source="003U.a" name="~rdf:about">
+			<occurrence only="1"/>
+		</data>
+		
+		<!-- 008 allows multiple rdf:type's -->
+		<choose name="*rdf:type">
+			<data source="004B.a">
+				<lookup in="authority_type" />
+			</data>
+			<data source="_id">
+				<constant
+					value="http://d-nb.info/standards/elementset/gnd#SubjectHeading" />
+			</data>
+		</choose>
+
+		<!-- 035 -->
+		<data source="007K.0" name="gnd:gndIdentifier"/>
+
+		<!-- 039 -->
+		<combine name="gnd:oldAuthorityNumber" reset="true" value="${prefix}${number}">
+			<data source="007N.a" name="prefix">
+				<lookup in="authority_prefix"/>
+			</data>
+			<data source="007N.0" name="number"/>
+		</combine>
+
+		<!-- 043 -->
+		<data source="042B.a" name="*gnd:geographicAreaCode">
+			<case to="upper"/>
+			<lookup in="country_code"/>
+		</data>
+
+		<!-- 065 -->
+		<data source="042A.a" name="*gnd:gndSubjectCategory">
+			<lookup in="gnd_classification"/>
+		</data>
+
+		<!-- 260 -->
+		<data source="041O.0" name="*gnd:complexSeeReferenceSubject">
+			<compose prefix="http://d-nb.info/gnd/"/>
+		</data>
+
+		<!-- 377 -->
+		<data source="042C.a" name="*gnd:languageCode">
+			<case to="lower"/>
+			<lookup in="language_code"/>
+		</data>
+
+		<!-- 678 -->
+		<data source="050G.b" name="gnd:biographicalOrHistoricalInformation$de"/>
+
+		<!-- 679 -->
+		<data source="050H.a" name="gnd:definition$de"/>
+
+	</rules>
+
+	<!-- 083 -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/general/ddc.xml" parse="xml"/>
+
+	<!-- 150 ; 450 -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/names/ts_name.xml" parse="xml"/>
+
+	<!-- 5XX -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/rels/ts_rel.xml" parse="xml"/>
+	
+	<!-- 548 datb -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/dates/datb.xml"
+		parse="xml" />
+		
+	<!-- 548 dats -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/dates/dats.xml"
+		parse="xml" />
+		
+	<!-- 670 -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/general/homepage.xml" parse="xml"/>
+
+	<!-- maps relation codes -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/rel_codes.xml" parse="xml"/>
+
+	<maps>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/namespaces.xml" parse="xml"/>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/authority_type.xml" parse="xml"/>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/country_code.xml" parse="xml"/>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/gnd_classification.xml" parse="xml"/>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/language_code.xml" parse="xml"/>
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/authority_prefix.xml" parse="xml"/>
+	
+	<jndisqlmap name="wikip" datasource="$[datasource]" 
+			query="SELECT wpurl FROM wikipedia where gndid= ?" />
+			
+	<jndisqlmap name="stw" datasource="$[datasource]"
+			query="SELECT CONCAT_WS (';',stwid, relation) FROM swdstw where gndid= ?" />
+
+	</maps>
+</metamorph>

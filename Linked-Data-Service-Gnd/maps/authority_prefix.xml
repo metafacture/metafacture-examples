@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map name="authority_prefix" xmlns="http://www.culturegraph.org/metamorph">
+	<entry name="swd" value="(DE-588c)" />
+	<entry name="pnd" value="(DE-588a)" />
+	<entry name="gkd" value="(DE-588b)" />
+	<entry name="dma" value="(DE-101c)" />
+	<entry name="gnd" value="(DE-588)" />
+</map>

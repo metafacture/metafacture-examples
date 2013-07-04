@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 150 -->
+	<combine name="gnd:preferredNameForTheSubjectHeading" value="${name}${addition}"
+		reset="true" flushWith="041A">
+		<data source="041A.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="041A">
+			<data source="041A.g">
+				<compose prefix=", " />
+			</data>
+			<data source="041A.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+
+	<!-- 450 -->
+	<combine name="gnd:variantNameForTheSubjectHeading" value="${name}${addition}"
+		reset="true" flushWith="041@">
+		<data source="041@.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="041@">
+			<data source="041@.g">
+				<compose prefix=", " />
+			</data>
+			<data source="041@.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+</rules>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+	<!-- 548 datv -->
+	<combine name="${name}" value="${value}" reset="true"
+		sameEntity="true">
+		<data source="060R.4" name="name">
+			<lookup>
+				<entry name="datj" value="gnd:dateOfPublication" />
+			</lookup>
+		</data>
+		<combine name="value" value="${a}${b}${c}${d}" flushWith="060R"
+			sameEntity="true" reset="true">
+
+			<data source="060R.a" name="a">
+				<compose postfix="-" />
+			</data>
+			<data source="060R.b" name="b">
+				<compose prefix="-" />
+			</data>
+			<data source="060R.c" name="c" />
+			<data source="060R.d" name="d">
+				<compose prefix="ca. " />
+			</data>
+			<postprocess>
+				<replace pattern="--" with="-" />
+			</postprocess>
+		</combine>
+	</combine>
+</rules>

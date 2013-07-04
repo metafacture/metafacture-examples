@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 100 -->
+	<combine name="gnd:preferredNameForThePerson"
+		value="${personalname}${surname}${forename}${prefix}${addition}"
+		flushWith="028A" reset="true">
+		<data source="028A.P" name="personalname" />
+		<data source="028A.a" name="surname" />
+		<data source="028A.d" name="forename">
+			<compose prefix=", " />
+		</data>
+		<data source="028A.c" name="prefix">
+			<compose prefix=" " />
+		</data>
+		<concat name="addition" prefix=" &lt;" postfix="&gt;"
+			delimiter=", " flushWith="028A" reset="true">
+			<data source="028A.n" />
+			<data source="028A.l" />
+			<data source="028A.g" />
+		</concat>
+	</combine>
+
+	<!-- 100 name entity -->
+	<entity name="gnd:preferredNameEntityForThePerson" flushWith="028A"
+		sameEntity="true" reset="true">
+	<data name="~rdf:parseType" source="028A" >	
+			<constant value="Resource" />
+		</data>
+		<data name="gnd:personalName" source="028A.P" />
+		<data name="gnd:surname" source="028A.a" />
+		<data name="gnd:forename" source="028A.d" />
+		<data name="gnd:prefix" source="028A.c" />
+		<data name="gnd:counting" source="028A.n" />
+		<data name="gnd:epithetGenericNameTitleOrTerritory" source="028A.l" />
+		<data name="gnd:addition" source="028A.g" />
+	</entity>
+
+	<!-- 400 -->
+	<combine name="gnd:variantNameForThePerson"
+		value="${personalname}${surname}${forename}${prefix}${addition}"
+		flushWith="028@" reset="true">
+		<data source="028@.P" name="personalname" />
+		<data source="028@.a" name="surname" />
+		<data source="028@.d" name="forename">
+			<compose prefix=", " />
+		</data>
+		<data source="028@.c" name="prefix">
+			<compose prefix=" " />
+		</data>
+		<concat name="addition" prefix=" &lt;" postfix="&gt;"
+			delimiter=", " flushWith="028@" reset="true">
+			<data source="028@.n" />
+			<data source="028@.l" />
+			<data source="028@.g" />
+		</concat>
+	</combine>
+
+	<!-- 400 name entity -->
+	<entity name="gnd:variantNameEntityForThePerson" flushWith="028@"
+		sameEntity="true" reset="true">
+		<data name="~rdf:parseType" source="028@" >
+			<constant value="Resource" />
+		</data>
+		<data name="gnd:personalName" source="028@.P" />
+		<data name="gnd:surname" source="028@.a" />
+		<data name="gnd:forename" source="028@.d" />
+		<data name="gnd:prefix" source="028@.c" />
+		<data name="gnd:counting" source="028@.n" />
+		<data name="gnd:epithetGenericNameTitleOrTerritory" source="028@.l" />
+		<data name="gnd:addition" source="028@.g" />
+	</entity>
+</rules>

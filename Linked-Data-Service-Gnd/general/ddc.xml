@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 083 -->
+	<combine name="*${name}" value="${value}" reset="true">
+		<data source="037G.d" name="name">
+			<lookup>
+				<entry name="1" value="gnd:relatedDdcWithDegreeOfDeterminacy1" />
+				<entry name="2" value="gnd:relatedDdcWithDegreeOfDeterminacy2" />
+				<entry name="3" value="gnd:relatedDdcWithDegreeOfDeterminacy3" />
+				<entry name="4" value="gnd:relatedDdcWithDegreeOfDeterminacy4" />
+			</lookup>
+		</data>
+		<data source="037G.c" name="value">
+			<regexp match="^[0-9]{1,3}\.?[0-9]{0,10}" />
+			<compose prefix="http://d-nb.info/ddc/class/"/>
+		</data>
+	</combine>
+
+</rules>

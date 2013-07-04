@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metamorph xmlns="http://www.culturegraph.org/metamorph"
+	xmlns:xi="http://www.w3.org/2001/XInclude" entityMarker="." version="1">
+
+		<meta>
+		<name>Umsetzung für nicht-individualierte Personen - Version 1.2</name>
+	</meta>
+
+	<rules>
+		<!-- about attribute -->
+		<data source="003U.a" name="~rdf:about">
+			<occurrence only="1"/>
+		</data>
+		
+		<!-- 005 -->
+		<data source="002@.0" name="*rdf:type">
+			<substring start="1" end="2" />
+			<lookup>
+				<entry name="n"
+					value="http://d-nb.info/standards/elementset/gnd#UndifferentiatedPerson" />
+			</lookup>
+		</data>
+
+		<!-- 035 -->
+		<data source="007K.0" name="gnd:gndIdentifier" />
+
+		<!-- 039 -->
+		<combine name="gnd:oldAuthorityNumber" reset="true" value="${prefix}${number}">
+			<data source="007N.a" name="prefix">
+				<lookup in="authority_prefix" />
+			</data>
+			<data source="007N.0" name="number" />
+		</combine>
+
+		<!-- 692 -->
+		<data source="046G.a" name="gnd:publication" />
+	</rules>
+
+	<!-- rules 100 ; 400 -->
+	<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/names/tpn_name.xml"
+		parse="xml" />
+		
+	<maps>
+
+		<!-- Xinclude -->
+
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/namespaces.xml"
+			parse="xml" />
+		<xi:include href="http://config.d-nb.de/conversion-service/metamorph/gnd/maps/authority_prefix.xml"
+			parse="xml" />
+	</maps>
+
+</metamorph>
