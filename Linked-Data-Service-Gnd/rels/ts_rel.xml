@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="028R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_500" />
+		</data>
+		<data source="028R.0" name="value" />
+	</combine>
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="029R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_510" />
+		</data>
+		<data source="029R.0" name="value" />
+	</combine>
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="030R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_511" />
+		</data>
+		<data source="030R.0" name="value" />
+	</combine>
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="022R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_530" />
+		</data>
+		<data source="022R.0" name="value" />
+	</combine>
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="041R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_550" />
+		</data>
+		<data source="041R.0" name="value" />
+	</combine>
+	<combine name="*${name}" value="http://d-nb.info/gnd/${value}"
+		reset="true" sameEntity="true">
+		<data source="065R.4" name="name">
+			<case to="lower" />
+			<lookup in="rel_code_s_551" />
+		</data>
+		<data source="065R.0" name="value" />
+	</combine>
+</rules>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 130 -->
+	<combine name="gnd:preferredNameForTheWork" value="${name_work}${name_expr}${addition}${oplus}"
+		reset="true" flushWith="022A">
+		<data source="022A.a" name="name_work" />
+		<data source="022A.t" name="name_expr" />
+		<concat delimiter="" name="addition" reset="true" flushWith="022A">
+			<data source="022A.g">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="022A.m">
+				<compose prefix="#, " postfix="#" />
+			</data>
+			<data source="022A.n">
+				<compose prefix=", " />
+			</data>
+			<data source="022A.p">
+				<compose prefix=" / " />
+			</data>
+		</concat>
+		<concat delimiter="" name="oplus" reset="true" flushWith="022A">
+			<data source="022A.o" name="o">
+				<compose prefix=" / " />
+			</data>
+			<data source="022A.s" name="s">
+				<compose prefix=". " />
+			</data>
+			<data source="022A.x" name="x">
+				<compose prefix=" / " />
+			</data>
+			<data source="022A.f" name="f">
+				<compose prefix=", " />
+			</data>
+			<data source="022A.r" name="r">
+				<compose prefix=", " />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern="&gt; &lt;" with=", " />
+			<replace pattern=" &lt;&gt;" with="" />
+			<replace pattern="##," with="" />
+			<replace pattern="#" with="" />
+			<replace pattern="@" with="" />
+			<replace pattern="&gt;, " with="&gt; " />
+		</postprocess>
+	</combine>
+
+	<!-- 430 -->
+	<combine name="gnd:variantNameForTheWork" value="${name_work}${name_expr}${addition}${oplus}"
+		reset="true" flushWith="022@">
+		<data source="022@.a" name="name_work" />
+		<data source="022@.t" name="name_expr" />
+		<concat delimiter="" name="addition" reset="true" flushWith="022@">
+			<data source="022@.g">
+				<compose prefix=" &lt;" postfix="&gt;" />
+			</data>
+			<data source="022@.m">
+				<compose prefix="#, " postfix="#" />
+			</data>
+			<data source="022@.n">
+				<compose prefix=", " />
+			</data>
+			<data source="022@.p">
+				<compose prefix=" / " />
+			</data>
+		</concat>
+		<concat delimiter="" name="oplus" reset="true" flushWith="022@">
+			<data source="022@.o" name="o">
+				<compose prefix=" / " />
+			</data>
+			<data source="022@.s" name="s">
+				<compose prefix=". " />
+			</data>
+			<data source="022@.x" name="x">
+				<compose prefix=" / " />
+			</data>
+			<data source="022@.f" name="f">
+				<compose prefix=", " />
+			</data>
+			<data source="022@.r" name="r">
+				<compose prefix=", " />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern="&gt; &lt;" with=", " />
+			<replace pattern=" &lt;&gt;" with="" />
+			<replace pattern="##," with="" />
+			<replace pattern="#" with="" />
+			<replace pattern="&gt;, " with="&gt; " />
+		</postprocess>
+	</combine>
+</rules>

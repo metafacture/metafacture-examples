@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+	
+	<!-- 110 -->
+	<combine name="gnd:preferredNameForTheCorporateBody" value="${name}${addition}"
+			reset="true" flushWith="029A">
+			<data source="029A.a" name="name" />
+			<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+				reset="true" flushWith="029A">
+				<data source="029A.n">
+					<compose prefix=", " />
+				</data>
+				<data source="029A.g">
+					<compose prefix=", " />
+				</data>
+				<data source="029A.b">
+					<compose prefix="&gt; / " postfix=" &lt;" />
+				</data>
+				<data source="029A.x">
+					<compose prefix="&gt; / " postfix=" &lt;" />
+				</data>
+			</concat>
+			<postprocess>
+				<replace pattern="&lt;, " with="&lt;" />
+				<replace pattern=" &lt;&gt;" with="" />
+			</postprocess>
+		</combine>
+		
+		<!-- 410 -->
+		<combine name="gnd:variantNameForTheCorporateBody" value="${name}${addition}"
+			reset="true" flushWith="029@">
+			<data source="029@.a" name="name" />
+			<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+				reset="true" flushWith="029@">
+				<data source="029@.n">
+					<compose prefix=", " />
+				</data>
+				<data source="029@.g">
+					<compose prefix=", " />
+				</data>
+				<data source="029@.b">
+					<compose prefix="&gt; / " postfix=" &lt;" />
+				</data>
+				<data source="029@.x">
+					<compose prefix="&gt; / " postfix=" &lt;" />
+				</data>
+			</concat>
+			<postprocess>
+				<replace pattern="&lt;, " with="&lt;" />
+				<replace pattern=" &lt;&gt;" with="" />
+			</postprocess>
+		</combine>
+</rules>
