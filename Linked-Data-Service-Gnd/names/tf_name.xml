@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 111 -->
+	<combine name="gnd:preferredNameForTheConferenceOrEvent" value="${name}${addition}"
+		reset="true" flushWith="030A">
+		<data source="030A.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="030A">
+			<data source="030A.n">
+				<compose prefix=", " />
+			</data>
+			<data source="030A.d">
+				<compose prefix=", " />
+			</data>
+			<data source="030A.c">
+				<compose prefix=", " />
+			</data>
+			<data source="030A.g">
+				<compose prefix=", " />
+			</data>
+			<data source="030A.b">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+			<data source="030A.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+
+	<!-- 411 -->
+	<combine name="gnd:variantNameForTheConferenceOrEvent" value="${name}${addition}"
+		reset="true" flushWith="030@">
+		<data source="030@.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="030@">
+			<data source="030@.n">
+				<compose prefix=", " />
+			</data>
+			<data source="030@.d">
+				<compose prefix=", " />
+			</data>
+			<data source="030@.c">
+				<compose prefix=", " />
+			</data>
+			<data source="030@.g">
+				<compose prefix=", " />
+			</data>
+			<data source="030@.b">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+			<data source="030@.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+</rules>

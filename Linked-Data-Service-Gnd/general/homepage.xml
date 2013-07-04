@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 670 -->
+	<combine name="${name}" value="${value}" reset="true"
+		sameEntity="true">
+		<data source="050E.a" name="name">
+			<case to="lower" />
+			<lookup>
+				<entry name="homepage" value="*gnd:homepage" />
+			</lookup>
+		</data>
+		<data source="050E.u" name="value" >
+			<java class="de.dNb.conversion.rdf.tools.CheckIRI"/>
+		</data>
+	</combine>
+
+</rules>

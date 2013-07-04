@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<maps xmlns="http://www.culturegraph.org/metamorph">
+	<map name="rel_code_b_500">
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="feie" value="gnd:celebratedPerson"></entry>
+		<entry name="saml" value="gnd:collector"></entry>
+		<entry name="bete" value="gnd:contributingPerson"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="grue" value="gnd:founder"></entry>
+		<entry name="musi" value="gnd:musician"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_b_510">
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="feie" value="gnd:celebratedCorporateBody"></entry>
+		<entry name="saml" value="gnd:collector"></entry>
+		<entry name="bete" value="gnd:contributingCorporateBody"></entry>
+		<entry name="mitg" value="gnd:corporateBodyIsMember"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="grue" value="gnd:founder"></entry>
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfTheCorporateBody"></entry>
+		<entry name="vorg" value="gnd:precedingCorporateBody"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="nach" value="gnd:succeedingCorporateBody"></entry>
+		<entry name="nazw" value="gnd:temporaryNameOfTheCorporateBody"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_b_511">
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfTheCorporateBody"></entry>
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_b_530">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_b_550">
+		<entry name="obin" value="gnd:broaderTermInstantial"></entry>
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="obmo" value="gnd:broaderTermWithMoreThanOneElement"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="feie" value="gnd:celebratedTopic"></entry>
+		<entry name="akti" value="gnd:fieldOfActivity"></entry>
+		<entry name="funk" value="gnd:functionOrRole"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_b_551">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="bete" value="gnd:contributingPlaceOrGeographicName"></entry>
+		<entry name="mitg" value="gnd:corporateBodyIsMember"></entry>
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfTheCorporateBody"></entry>
+		<entry name="ortm" value="gnd:otherPlace"></entry>
+		<entry name="orta" value="gnd:placeOfBusiness"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="nach" value="gnd:succeedingPlaceOrGeographicName"></entry>
+		<entry name="geow" value="gnd:spatialAreaOfActivity"></entry>
+		<entry name="nazw" value="gnd:temporaryNameOfTheCorporateBody"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_500">
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="feie" value="gnd:celebratedPerson"></entry>
+		<entry name="bete" value="gnd:contributingPerson"></entry>
+		<entry name="kura" value="gnd:curator"></entry>
+		<entry name="aust" value="gnd:exhibitor"></entry>
+		<entry name="musi" value="gnd:musician"></entry>
+		<entry name="vera" value="gnd:organizerOrHost"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_510">
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="feie" value="gnd:celebratedCorporateBody"></entry>
+		<entry name="bete" value="gnd:contributingCorporateBody"></entry>
+		<entry name="kura" value="gnd:curator"></entry>
+		<entry name="aust" value="gnd:exhibitor"></entry>
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfTheConferenceOrEvent"></entry>
+		<entry name="vera" value="gnd:organizerOrHost"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_511">
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfTheConferenceOrEvent"></entry>
+		<entry name="vorg" value="gnd:precedingConferenceOrEvent"></entry>
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="nach" value="gnd:succeedingConferenceOrEvent"></entry>
+		<entry name="nazw" value="gnd:temporaryNameOfTheConferenceOrEvent"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_530">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="anla" value="gnd:occasionOfTheWork"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_550">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="obmo" value="gnd:broaderTermWithMoreThanOneElement"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="feie" value="gnd:celebratedTopic"></entry>
+		<entry name="akti" value="gnd:fieldOfActivity"></entry>
+		<entry name="anla" value="gnd:occasionOfTheSubjectHeading"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_f_551">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="ortm" value="gnd:otherPlace"></entry>
+		<entry name="ortv" value="gnd:placeOfConferenceOrEvent"></entry>
+		<entry name="vorg" value="gnd:precedingPlaceOrGeographicName"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="geow" value="gnd:spatialAreaOfActivity"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_g_500">
+		<entry name="kueg" value="gnd:accreditedArtist"></entry>
+		<entry name="arch" value="gnd:architect"></entry>
+		<entry name="kuen" value="gnd:artist"></entry>
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="bauh" value="gnd:buildingOwner"></entry>
+		<entry name="feie" value="gnd:celebratedPerson"></entry>
+		<entry name="kuez" value="gnd:citedArtist"></entry>
+		<entry name="widm" value="gnd:dedicatee"></entry>
+		<entry name="kuew" value="gnd:doubtfulArtist"></entry>
+		<entry name="kue1" value="gnd:firstArtist"></entry>
+		<entry name="befr" value="gnd:formerOwner"></entry>
+		<entry name="grue" value="gnd:founder"></entry>
+		<entry name="verr" value="gnd:initiator"></entry>
+		<entry name="besi" value="gnd:owner"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rest" value="gnd:restorer"></entry>
+		<entry name="bilh" value="gnd:sculptor"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+	</map>
+	<map name="rel_code_g_510">
+		<entry name="kueg" value="gnd:accreditedArtist"></entry>
+		<entry name="arch" value="gnd:architect"></entry>
+		<entry name="kuen" value="gnd:artist"></entry>
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="kuez" value="gnd:citedArtist"></entry>
+		<entry name="widm" value="gnd:dedicatee"></entry>
+		<entry name="kuew" value="gnd:doubtfulArtist"></entry>
+		<entry name="kue1" value="gnd:firstArtist"></entry>
+		<entry name="befr" value="gnd:formerOwner"></entry>
+		<entry name="grue" value="gnd:founder"></entry>
+		<entry name="verr" value="gnd:initiator"></entry>
+		<entry name="besi" value="gnd:owner"></entry>
+		<entry name="mitg" value="gnd:placeOrGeographicNameIsMember"></entry>
+		<entry name="vorg" value="gnd:precedingCorporateBody"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rest" value="gnd:restorer"></entry>
+		<entry name="bilh" value="gnd:sculptor"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="nach" value="gnd:succeedingCorporateBody"></entry>
+		<entry name="nazw" value="gnd:temporaryNameOfThePlaceOrGeographicName"></entry>
+	</map>
+	<map name="rel_code_g_511">
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_g_530">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+	</map>
+	<map name="rel_code_g_550">
+		<entry name="obin" value="gnd:broaderTermInstantial"></entry>
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="obmo" value="gnd:broaderTermWithMoreThanOneElement"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+	</map>
+	<map name="rel_code_g_551">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="adue" value="gnd:hierarchicalSuperiorOfPlaceOrGeographicName"></entry>
+		<entry name="orta" value="gnd:place"></entry>
+		<entry name="vorg" value="gnd:precedingPlaceOrGeographicName"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="nach" value="gnd:succeedingPlaceOrGeographicName"></entry>
+		<entry name="punk" value="gnd:StartingOrFinalPointOfADistance"></entry>
+		<entry name="nazw" value="gnd:temporaryNameOfThePlaceOrGeographicName"></entry>
+	</map>
+	<map name="rel_code_p_500">
+		<entry name="beza" value="gnd:acquaintanceshipOrFriendship"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="bezf" value="gnd:familialRelationship"></entry>
+		<entry name="mitg" value="gnd:memberOfTheFamily"></entry>
+		<entry name="bezb" value="gnd:professionalRelationship"></entry>
+		<entry name="pseu" value="gnd:pseudonym"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_p_510">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_p_511">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_p_530">
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+	</map>
+	<map name="rel_code_p_550">
+		<entry name="akad" value="gnd:academicDegree"></entry>
+		<entry name="obin" value="gnd:broaderTermInstantial"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="akti" value="gnd:fieldOfActivity"></entry>
+		<entry name="stud" value="gnd:fieldOfStudy"></entry>
+		<entry name="funk" value="gnd:functionOrRole"></entry>
+		<entry name="berc" value="gnd:professionOrOccupation"></entry>
+		<entry name="beru" value="gnd:professionOrOccupation"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="adel" value="gnd:titleOfNobility"></entry>
+	</map>
+	<map name="rel_code_p_551">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="ortc" value="gnd:characteristicPlace"></entry>
+		<entry name="ortw" value="gnd:placeOfActivity"></entry>
+		<entry name="ortg" value="gnd:placeOfBirth"></entry>
+		<entry name="orts" value="gnd:placeOfDeath"></entry>
+		<entry name="ortx" value="gnd:placeOfExile"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_pif_500">
+		<entry name="beza" value="gnd:acquaintanceshipOrFriendship"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="bezf" value="gnd:familialRelationship"></entry>
+		<entry name="bezb" value="gnd:professionalRelationship"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_pif_510">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="korr" value="gnd:correspondent"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_pif_511">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_pif_530">
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+	</map>
+	<map name="rel_code_pif_550">
+		<entry name="akti" value="gnd:fieldOfActivity"></entry>
+		<entry name="berc" value="gnd:professionOrOccupation"></entry>
+		<entry name="beru" value="gnd:professionOrOccupation"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_pif_551">
+		<entry name="affi" value="gnd:affiliation"></entry>
+		<entry name="ortw" value="gnd:placeOfActivity"></entry>
+		<entry name="ortx" value="gnd:placeOfExile"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_s_500">
+		<entry name="feie" value="gnd:celebratedPerson"></entry>
+		<entry name="bete" value="gnd:contributingPerson"></entry>
+		<entry name="urhe" value="gnd:creator"></entry>
+		<entry name="erfi" value="gnd:inventor"></entry>
+		<entry name="hers" value="gnd:manufacturer"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="uebe" value="gnd:translator"></entry>
+	</map>
+	<map name="rel_code_s_510">
+		<entry name="feie" value="gnd:celebratedCorporateBody"></entry>
+		<entry name="urhe" value="gnd:creator"></entry>
+		<entry name="erfi" value="gnd:inventor"></entry>
+		<entry name="hers" value="gnd:manufacturer"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="uebe" value="gnd:translator"></entry>
+	</map>
+	<map name="rel_code_s_511">
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_s_530">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+	</map>
+	<map name="rel_code_s_550">
+		<entry name="obge" value="gnd:broaderTermGeneric"></entry>
+		<entry name="obin" value="gnd:broaderTermInstantial"></entry>
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="obmo" value="gnd:broaderTermWithMoreThanOneElement"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="feie" value="gnd:celebratedTopic"></entry>
+		<entry name="funk" value="gnd:functionOrRole"></entry>
+		<entry name="anla" value="gnd:occasionOfTheSubjectHeading"></entry>
+		<entry name="vorg" value="gnd:precedingSubject"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="nach" value="gnd:succeedingSubjectHeading"></entry>
+	</map>
+	<map name="rel_code_s_551">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="bete" value="gnd:contributingPlaceOrGeographicName"></entry>
+		<entry name="orta" value="gnd:place"></entry>
+		<entry name="ortw" value="gnd:placeOfActivity"></entry>
+		<entry name="orth" value="gnd:placeOfManufacture"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+	</map>
+	<map name="rel_code_u_500">
+		<entry name="kueg" value="gnd:accreditedArtist"></entry>
+		<entry name="autg" value="gnd:accreditedAuthor"></entry>
+		<entry name="komg" value="gnd:accreditedComposer"></entry>
+		<entry name="adre" value="gnd:addressee"></entry>
+		<entry name="anno" value="gnd:annotator"></entry>
+		<entry name="arra" value="gnd:arranger"></entry>
+		<entry name="kuen" value="gnd:artist"></entry>
+		<entry name="auta" value="gnd:author"></entry>
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="bubi" value="gnd:bookbinder"></entry>
+		<entry name="gest" value="gnd:bookdesigner"></entry>
+		<entry name="kart" value="gnd:cartographer"></entry>
+		<entry name="feie" value="gnd:celebratedPerson"></entry>
+		<entry name="chre" value="gnd:choreographer"></entry>
+		<entry name="kuez" value="gnd:citedArtist"></entry>
+		<entry name="autz" value="gnd:citedAuthor"></entry>
+		<entry name="komz" value="gnd:citedComposer"></entry>
+		<entry name="saml" value="gnd:collector"></entry>
+		<entry name="comp" value="gnd:compiler"></entry>
+		<entry name="koma" value="gnd:composer"></entry>
+		<entry name="leih" value="gnd:conferrer"></entry>
+		<entry name="bete" value="gnd:contributingPerson"></entry>
+		<entry name="kopi" value="gnd:copist"></entry>
+		<entry name="urhe" value="gnd:creator"></entry>
+		<entry name="kura" value="gnd:curator"></entry>
+		<entry name="widm" value="gnd:dedicatee"></entry>
+		<entry name="desi" value="gnd:designer"></entry>
+		<entry name="regi" value="gnd:director"></entry>
+		<entry name="kame" value="gnd:directorOfPhotography"></entry>
+		<entry name="kuew" value="gnd:doubtfulArtist"></entry>
+		<entry name="autw" value="gnd:doubtfulAuthor"></entry>
+		<entry name="komw" value="gnd:doubtfulComposer"></entry>
+		<entry name="hrsg" value="gnd:editor"></entry>
+		<entry name="grav" value="gnd:engraver"></entry>
+		<entry name="radi" value="gnd:etcher"></entry>
+		<entry name="autf" value="gnd:fictitiousAuthor"></entry>
+		<entry name="kue1" value="gnd:firstArtist"></entry>
+		<entry name="aut1" value="gnd:firstAuthor"></entry>
+		<entry name="kom1" value="gnd:firstComposer"></entry>
+		<entry name="befr" value="gnd:formerOwner"></entry>
+		<entry name="illu" value="gnd:illustratorOrIlluminator"></entry>
+		<entry name="verr" value="gnd:initiator"></entry>
+		<entry name="istm" value="gnd:instrumentalist"></entry>
+		<entry name="libr" value="gnd:librettist"></entry>
+		<entry name="lith" value="gnd:lithographer"></entry>
+		<entry name="hers" value="gnd:manufacturer"></entry>
+		<entry name="spre" value="gnd:narrator"></entry>
+		<entry name="besi" value="gnd:owner"></entry>
+		<entry name="malr" value="gnd:painter"></entry>
+		<entry name="foto" value="gnd:photographer"></entry>
+		<entry name="dich" value="gnd:poet"></entry>
+		<entry name="druc" value="gnd:printer"></entry>
+		<entry name="rela" value="gnd:relatedPerson"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rest" value="gnd:restorer"></entry>
+		<entry name="bear" value="gnd:revisor"></entry>
+		<entry name="vfrd" value="gnd:screenwriter"></entry>
+		<entry name="bilh" value="gnd:sculptor"></entry>
+		<entry name="saen" value="gnd:singer"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="reda" value="gnd:subeditor"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+		<entry name="uebe" value="gnd:translator"></entry>
+		<entry name="komm" value="gnd:writerOfAddedCommentary"></entry>
+	</map>
+	<map name="rel_code_u_510">
+		<entry name="kueg" value="gnd:accreditedArtist"></entry>
+		<entry name="autg" value="gnd:accreditedAuthor"></entry>
+		<entry name="komg" value="gnd:accreditedComposer"></entry>
+		<entry name="adre" value="gnd:addressee"></entry>
+		<entry name="anno" value="gnd:annotator"></entry>
+		<entry name="arra" value="gnd:arranger"></entry>
+		<entry name="kuen" value="gnd:artist"></entry>
+		<entry name="auta" value="gnd:author"></entry>
+		<entry name="stif" value="gnd:benefactor"></entry>
+		<entry name="gest" value="gnd:bookdesigner"></entry>
+		<entry name="kart" value="gnd:cartographer"></entry>
+		<entry name="feie" value="gnd:celebratedCorporateBody"></entry>
+		<entry name="chre" value="gnd:choreographer"></entry>
+		<entry name="kuez" value="gnd:citedArtist"></entry>
+		<entry name="autz" value="gnd:citedAuthor"></entry>
+		<entry name="komz" value="gnd:citedComposer"></entry>
+		<entry name="saml" value="gnd:collector"></entry>
+		<entry name="koma" value="gnd:composer"></entry>
+		<entry name="leih" value="gnd:conferrer"></entry>
+		<entry name="bete" value="gnd:contributingCorporateBody"></entry>
+		<entry name="kopi" value="gnd:copist"></entry>
+		<entry name="urhe" value="gnd:creator"></entry>
+		<entry name="kura" value="gnd:curator"></entry>
+		<entry name="widm" value="gnd:dedicatee"></entry>
+		<entry name="desi" value="gnd:designer"></entry>
+		<entry name="regi" value="gnd:director"></entry>
+		<entry name="kame" value="gnd:directorOfPhotography"></entry>
+		<entry name="kuew" value="gnd:doubtfulArtist"></entry>
+		<entry name="autw" value="gnd:doubtfulAuthor"></entry>
+		<entry name="komw" value="gnd:doubtfulComposer"></entry>
+		<entry name="hrsg" value="gnd:editor"></entry>
+		<entry name="grav" value="gnd:engraver"></entry>
+		<entry name="radi" value="gnd:etcher"></entry>
+		<entry name="autf" value="gnd:fictitiousAuthor"></entry>
+		<entry name="kue1" value="gnd:firstArtist"></entry>
+		<entry name="aut1" value="gnd:firstAuthor"></entry>
+		<entry name="kom1" value="gnd:firstComposer"></entry>
+		<entry name="befr" value="gnd:formerOwner"></entry>
+		<entry name="illu" value="gnd:illustratorOrIlluminator"></entry>
+		<entry name="verr" value="gnd:initiator"></entry>
+		<entry name="libr" value="gnd:librettist"></entry>
+		<entry name="lith" value="gnd:lithographer"></entry>
+		<entry name="hers" value="gnd:manufacturer"></entry>
+		<entry name="besi" value="gnd:owner"></entry>
+		<entry name="malr" value="gnd:painter"></entry>
+		<entry name="foto" value="gnd:photographer"></entry>
+		<entry name="dich" value="gnd:poet"></entry>
+		<entry name="druc" value="gnd:printer"></entry>
+		<entry name="rela" value="gnd:relatedCorporateBody"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rest" value="gnd:restorer"></entry>
+		<entry name="vfrd" value="gnd:screenwriter"></entry>
+		<entry name="bilh" value="gnd:sculptor"></entry>
+		<entry name="saen" value="gnd:singer"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="reda" value="gnd:subeditor"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+		<entry name="uebe" value="gnd:translator"></entry>
+		<entry name="komm" value="gnd:writerOfAddedCommentary"></entry>
+	</map>
+	<map name="rel_code_u_511">
+		<entry name="rela" value="gnd:relatedConferenceOrEvent"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_u_530">
+		<entry name="werk" value="gnd:accordingWork"></entry>
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="vorl" value="gnd:literarySource"></entry>
+		<entry name="anla" value="gnd:occasionOfTheWork"></entry>
+		<entry name="vorg" value="gnd:precedingWork"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="rela" value="gnd:relatedWork"></entry>
+		<entry name="nach" value="gnd:succeedingWork"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_u_550">
+		<entry name="obin" value="gnd:broaderTermInstantial"></entry>
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="obmo" value="gnd:broaderTermWithMoreThanOneElement"></entry>
+		<entry name="obal" value="gnd:broaderTermGeneral"></entry>
+		<entry name="feie" value="gnd:celebratedTopic"></entry>
+		<entry name="anla" value="gnd:occasionOfTheSubjectHeading"></entry>
+		<entry name="rela" value="gnd:relatedSubjectHeading"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="spon" value="gnd:sponsorOrPatron"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+	<map name="rel_code_u_551">
+		<entry name="obpa" value="gnd:broaderTermPartitive"></entry>
+		<entry name="ortb" value="gnd:placeOfCustody"></entry>
+		<entry name="ortf" value="gnd:placeOfDiscovery"></entry>
+		<entry name="orth" value="gnd:placeOfManufacture"></entry>
+		<entry name="rela" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="geoa" value="gnd:relatedPlaceOrGeographicName"></entry>
+		<entry name="vbal" value="gnd:relatedTerm"></entry>
+		<entry name="them" value="gnd:topic"></entry>
+	</map>
+</maps>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rules xmlns="http://www.culturegraph.org/metamorph">
+
+	<!-- 151 -->
+	<combine name="gnd:preferredNameForThePlaceOrGeographicName"
+		value="${name}${addition}" reset="true" flushWith="065A">
+		<data source="065A.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="065A">
+			<data source="065A.g">
+				<compose prefix=", " />
+			</data>
+			<data source="065A.z">
+				<compose prefix=", " />
+			</data>
+			<data source="065A.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+
+	<!-- 451 -->
+	<combine name="gnd:variantNameForThePlaceOrGeographicName"
+		value="${name}${addition}" reset="true" flushWith="065@">
+		<data source="065@.a" name="name" />
+		<concat prefix=" &lt;" postfix="&gt;" delimiter="" name="addition"
+			reset="true" flushWith="065@">
+			<data source="065@.g">
+				<compose prefix=", " />
+			</data>
+			<data source="065@.z">
+				<compose prefix=", " />
+			</data>
+			<data source="065@.x">
+				<compose prefix="&gt; / " postfix=" &lt;" />
+			</data>
+		</concat>
+		<postprocess>
+			<replace pattern="&lt;, " with="&lt;" />
+			<replace pattern=" &lt;&gt;" with="" />
+		</postprocess>
+	</combine>
+</rules>
