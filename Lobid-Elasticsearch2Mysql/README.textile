@@ -13,6 +13,10 @@ The flux with its tee-pipes does some more stuff in parallel:
 - serializing the elasticserach stream into one big xml gzipped file
 - creating a statistic about the field occurrences of the morphed data
 
+h2. Where is the java class the the flux commands point to?
+
+As always, look into the "flux-commands.properties":https://github.com/lobid/lodmill/blob/master/lodmill-rd/src/main/resources/flux-commands.properties.
+
 h2. How to execute
 
 For now it will only work if the lobid repository is checked out and the directory "lodmill-rd":https://github.com/lobid/lodmill/tree/master/lodmill-rd is built.
