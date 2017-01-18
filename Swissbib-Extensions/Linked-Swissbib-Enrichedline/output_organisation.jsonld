@@ -1,0 +1,3 @@
+[
+{"@id":"http://data.swissbib.ch/organisation/6c25e50c-5871-33c4-831a-680ad72e3bf1","@context":"https://resources.swissbib.ch/organisation/context.jsonld","@type":"http://xmlns.com/foaf/0.1/Organization","rdf:type":"http://xmlns.com/foaf/0.1/Organization","rdfs:label":"Robert Bosch GmbH. Geschäftsbereich Automationstechnik","owl:sameAs":"http://d-nb.info/gnd/2167402-4"}
+]

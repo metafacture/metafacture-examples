@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+
+    <macros>
+
+        <macro name="date-shortener">
+            <choose>
+                <data source="$[predicate]" name="$[abbrev]">
+                    <regexp match='"(\d\d\d\d)"' format="${1}"/>
+                </data>
+                <data source="$[predicate]" name="$[abbrev]">
+                    <regexp match='"(\d\d\d\d)-\d\d-\d\d"' format="${1}"/>
+                </data>
+            </choose>
+        </macro>
+
+        <macro name="date">
+            <choose>
+                <data source="$[predicate]" name="$[abbrev]">
+                    <regexp match='"(\d\d\d\d)"' format="${1}"/>
+                </data>
+                <data source="$[predicate]" name="$[abbrev]">
+                    <regexp match='"(\d\d\d\d-\d\d-\d\d)"' format="${1}"/>
+                </data>
+            </choose>
+        </macro>
+
+        <macro name="literal">
+            <data source="$[predicate]" name="$[abbrev]">
+                <regexp match='"(.*)"|(.*)' format="${1}"/>
+            </data>
+        </macro>
+
+        <macro name="language-tag">
+            <entity name="$[abbrev]{}" flushWith="$[predicate]">
+                <combine name="${lang}" value="${value}" flushWith="$[predicate]">
+                    <data name="value" source="$[predicate]">
+                        <regexp match='"(.*)"' format="${1}"/>
+                    </data>
+                    <data name="lang" source="$[predicate]">
+                        <regexp match='.*"@([^ ]+) *$' format="${1}"/>
+                    </data>
+                </combine>
+            </entity>
+        </macro>
+
+    </macros>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="enrichedMorph.xml" parse="xml"/>
+
+    <rules>
+
+        <data source="_id" name="\@context">
+            <constant value="https://resources.swissbib.ch/person/context.jsonld"/>
+        </data>
+
+    </rules>
+
+</metamorph>
