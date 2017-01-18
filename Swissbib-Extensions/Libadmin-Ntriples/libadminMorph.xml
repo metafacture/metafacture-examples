@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <rules>
+
+        <!--RECURSION-->
+        <combine name="@uri_library" value="http://data.swissbib.ch/organisation/${network}-${id}" reset="false"
+                 flushWith="data.institutions.sys_code">
+            <data source="data.institutions.sys_code" name="id">
+                <trim/>
+            </data>
+            <data source="data.group.code" name="network">
+                <trim/>
+            </data>
+        </combine>
+
+        <combine name="@uri_network" value="http://data.swissbib.ch/organisation/${network}">
+            <data source="data.group.code" name="network">
+                <trim/>
+                <blacklist>
+                    <entry name="REPOS"/>
+                </blacklist>
+            </data>
+        </combine>
+
+        <!--ENTITY NETWORK-->
+        <entity name="--" flushWith="data.group">
+
+            <!--URI OF THE NETWORK-->
+            <data source="@uri_network" name="_id"/>
+
+	    <data source="data.group.code" name="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+                <constant value="http://xmlns.com/foaf/0.1/Organization"/>
+            </data>
+
+	    <data name="http://www.w3.org/2000/01/rdf-schema#label" source="data.group.label.*">
+                <regexp match="(.*[^\s$])" format="${1}"/>
+            </data>
+
+        </entity>
+
+
+        <!--ENTITY LIBRARY-->
+
+        <entity name="--" flushWith="data.institutions">
+
+            <!--URI of the library-->
+            <data source="@uri_library" name="_id">
+                <regexp match="(http:\/\/data\.swissbib\.ch\/organisation\/)(REPOS-)?(.*)" format="${1}${3}"/>
+            </data>
+
+            <!--OFFICIAL NAME-->
+	    <data name="http://xmlns.com/foaf/0.1/name" source="data.institutions.name.*">
+                <blacklist>
+                    <entry name=""/>
+                </blacklist>
+                <regexp match="(.*[^\s$])" format="${1}"/>
+            </data>
+
+            <!--NAME FOR THE USER-->
+	    <data name="http://www.w3.org/2000/01/rdf-schema#label" source="data.institutions.label.*">
+                <regexp match="(.*[^\s$])" format="${1}"/>
+            </data>
+
+            <!--WEBSITE-->
+	    <data name="http://xmlns.com/foaf/0.1/homepage" source="data.institutions.website">
+                <blacklist>
+                    <entry name=""/>
+                </blacklist>
+                <trim/>
+            </data>
+
+            <!--MAIL-->
+	    <data name="http://xmlns.com/foaf/0.1/mbox" source="data.institutions.email">
+                <blacklist>
+                    <entry name=""/>
+                </blacklist>
+                <trim/>
+                <compose prefix="mailto:"/>
+            </data>
+
+            <!--POST ADDRESS-->
+            <entity name="http://www.w3.org/2006/vcard/ns#hasAddress" flushWith="data.institutions">
+                <data name="http://www.w3.org/2006/vcard/ns#street-address" source="data.institutions.address">
+                    <blacklist>
+                        <entry name=""/>
+                    </blacklist>
+                    <regexp match="(.*[^\s$])" format="${1}"/>
+                </data>
+                <data name="http://www.w3.org/2006/vcard/ns#postal-code" source="data.institutions.zip">
+                    <blacklist>
+                        <entry name=""/>
+                    </blacklist>
+                    <regexp match="(.*[^\s$])" format="${1}"/>
+                </data>
+                <data name="http://www.w3.org/2006/vcard/ns#locality" source="data.institutions.city">
+                    <blacklist>
+                        <entry name=""/>
+                    </blacklist>
+                    <regexp match="(.*[^\s$])" format="${1}"/>
+                </data>
+                <!--"http://www.w3.org/2006/vcard/ns#region" is a datatype property while "http://www.w3.org/2006/vcard/ns#hasRegion" is an object property-->
+                <data name="http://www.w3.org/2006/vcard/ns#hasRegion" source="data.institutions.canton">
+                    <trim/>
+                    <lookup in="cantons"/>
+                </data>
+            </entity>
+
+            <!--PHONE-->
+	    <data name="http://xmlns.com/foaf/0.1/phone" source="data.institutions.phone">
+                <regexp match="(\+\d\d)(\s)?(\(0\))?(\d\d)(\s)?(\d\d\d)(\s)?(\d\d)(\s)?(\d\d)"
+                        format="tel:${1}${4}${6}${8}${10}"/>
+            </data>
+
+            <!--ISIL-->
+	    <data name="http://dbpedia.org/ontology/isil" source="data.institutions.isil">
+                <blacklist>
+                    <entry name=""/>
+                </blacklist>
+                <trim/>
+            </data>
+
+        </entity>
+
+    </rules>
+
+    <maps>
+        <filemap name="cantons" files="cantons.txt"
+                 separator="\t"/>
+    </maps>
+
+
+</metamorph>
