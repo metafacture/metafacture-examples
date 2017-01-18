@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <vars>
+        <var name="swissbib_domain" value="http://data.swissbib.ch/bibliographicResource/"/>
+    </vars>
+
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash100.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash700.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash710.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash711.xml" parse="xml"/>
+
+
+    <rules>
+
+        <!-- Set id -->
+        <data source="001" name="_id"/>
+
+        <data source="001" name="\@id">
+            <compose prefix="http://data.swissbib.ch/bibliographicResource/"/>
+            <compose postfix="/about"/>
+        </data>
+
+        <!--RDF TYPE (CLASS)-->
+
+        <data source="_id" name="\@type">
+            <constant value="http://purl.org/ontology/bibo/document"/>
+        </data>
+
+        <!--REFERENCED JSON-LD CONTEXT-->
+        <data source="_id" name="\@context">
+            <constant value="https://resources.swissbib.ch/document/context.jsonld"/>
+        </data>
+
+        <!-- Definitions for recursions to be used later in substructures (must be set here!) -->
+
+        <data source="008" name="@language">
+            <substring start="35" end="38"/>
+        </data>
+
+
+        <!--BUILD BULK API HEADER FOR TYPE "DOCUMENT"-->
+
+        <!--BUILD THE RECORD "ABOUT"-->
+
+        <!--		<entity name="&#45;&#45;" flushWith="record" >-->
+        <!--To define the subject (root element) of each record.
+        "entity" makes it possible to create a hierarchical tag structure.
+        "flushWith" enables to group various subfields into one output, even if the field appears more than one time. -->
+
+        <!--PUBLICATION DATE OF THE RDF RECORD-->
+        <data name="dct:issued" source="_id">
+            <timestamp format="yyyy-MM-dd'T'HH:mm:ss.SSSXXX"/>
+        </data>
+
+        <!--LAST MODIFICATION DATE OF THE MARC RECORD-->
+        <data name="dct:modified" source="005">
+            <regexp match="^(\d\d\d\d)(\d\d)(\d\d)(\d\d)(\d\d)(\d\d)\.(\d)"
+                    format="${1}-${2}-${3}T${4}:${5}:${6}+01:00"/>
+        </data>
+
+        <!--NETWORK(S) THAT CREATED THE RECORD-->
+        <data source="035  .a" name="dct:contributor">
+            <regexp match="\((.*)\)" format="${1}"/>
+            <lookup in="networks"/>
+            <unique part="value"/>
+        </data>
+
+        <data source="035  .a" name="dc:contributor">
+            <!--rule for the case where the network is not in the lookup here above-->
+            <regexp match="\((.*)\)" format="${1}"/>
+            <blacklist>
+                <entry name="ABN"/>
+                <entry name="ALEX"/>
+                <entry name="BGR"/>
+                <entry name="BORIS"/>
+                <entry name="CCSA"/>
+                <entry name="CH-CCSA"/>
+                <entry name="DDB"/>
+                <entry name="DE-599"/>
+                <entry name="ECOD"/>
+                <entry name="IDSBB"/>
+                <entry name="IDSLU"/>
+                <entry name="IDSSG"/>
+                <entry name="IDSSG2"/>
+                <entry name="LIBIB"/>
+                <entry name="NEBIS"/>
+                <entry name="OCoLC"/>
+                <entry name="RERO"/>
+                <entry name="RETROS"/>
+                <entry name="SBT"/>
+                <entry name="SERVAL"/>
+                <entry name="SGBN"/>
+                <entry name="SLB"/>
+                <entry name="SNL"/>
+                <entry name="Sz"/>
+                <entry name="ZORA"/>
+            </blacklist>
+        </data>
+
+        <!--LOCAL ID OF THE RESOURCE-->
+        <data source="035  .a" name="bf:local">
+            <regexp match="\((.*)\)(.*)" format="${1}/${2}"/>
+            <unique part="value"/>
+        </data>
+
+        <!--LINK WITH THE BASIS RECORD-->
+        <data source="001" name="foaf:primaryTopic">
+            <compose prefix="http://data.swissbib.ch/bibliographicResource/"/>
+            <compose postfix="/about"/>
+        </data>
+
+
+        <!--		</entity>-->
+    </rules>
+
+    <maps>
+        <filemap name="cantons" files="maps/cantons.txt"
+                 separator="\t"/>
+        <filemap name="languages" files="maps/languages.txt"
+                 separator="\t"/>
+        <filemap name="countries" files="maps/countries.txt"
+                 separator="\t"/>
+        <filemap name="networks" files="maps/networks.txt"
+                 separator="\t"/>
+        <filemap name="type_content" files="maps/type_content.txt"
+                 separator="\t"/>
+        <filemap name="type_media" files="maps/type_media.txt"
+                 separator="\t"/>
+    </maps>
+
+</metamorph>
