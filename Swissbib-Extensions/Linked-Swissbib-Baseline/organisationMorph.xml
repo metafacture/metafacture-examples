@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <vars>
+        <var name="swissbib_domain" value="http://data.swissbib.ch/bibliographicResource/"/>
+    </vars>
+
+    <macros>
+        <macro name="gnd">
+            <combine name="owl:sameAs" value="${prefix}${id}" sameEntity="true" reset="true" flushWith="$[gndfield]">
+                <if>
+                    <data source="$[gndfield]">
+                        <regexp match="\(DE-588\)[^ ]+"/>
+                    </data>
+                </if>
+                <data source="$[gndfield]" name="prefix">
+                    <constant value="http://d-nb.info/gnd/"/>
+                </data>
+                <data source="$[gndfield]" name="id">
+                    <regexp match="\(DE-588\) *([^ ]+)" format="${1}"/>
+                </data>
+            </combine>
+        </macro>
+    </macros>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash710.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash711.xml" parse="xml"/>
+
+
+    <rules>
+
+        <!--BUILD THE BASIS RECORD -->
+
+        <!--710-->
+        <entity name="--" flushWith="710??">
+            <data name="_id" source="@key710"/>
+            <data name="@id" source="@key710">
+                <compose prefix="http://data.swissbib.ch/organisation/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="710??" name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Organization"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="710??" name="@context">
+                <constant value="https://resources.swissbib.ch/organisation/context.jsonld"/>
+            </data>
+
+            <concat name="rdfs:label" delimiter="" flushWith="710??" reset="true" sameEntity="true">
+                <data source="710??.a">
+                    <regexp match="(.*[^\.$])" format="${1}"/>
+                    <!--This regex matches everything except the eventual final dot.-->
+                </data>
+                <data source="710??.b">
+                    <regexp match="(.*[^\.$])" format="${1}"/>
+                    <compose prefix=". "/>
+                </data>
+                <data source="710??.c">
+                    <compose prefix=" "/>
+                </data>
+                <data source="710??.d">
+                    <compose prefix=" "/>
+                </data>
+                <data source="710??.n">
+                    <compose prefix=" "/>
+                </data>
+            </concat>
+            <call-macro name="gnd" gndfield="710??.0"/>
+
+
+        </entity>
+
+        <!--711-->
+        <entity name="--" flushWith="711??">
+            <data name="_id" source="@key711"/>
+            <data name="@id" source="@key711">
+                <compose prefix="http://data.swissbib.ch/organisation/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <!--            <data source="_id" name="@type">
+                            <constant value="http://xmlns.com/foaf/0.1/Organization"/>
+                        </data>-->
+            <data source="711??" name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Organization"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="711??" name="@context">
+                <constant value="https://resources.swissbib.ch/organisation/context.jsonld"/>
+            </data>
+
+            <concat name="rdfs:label" delimiter="" flushWith="711??" reset="true" sameEntity="true">
+                <data source="711??.a">
+                    <regexp match="(.*[^\.$])" format="${1}"/>
+                </data>
+                <data source="711??.c">
+                    <compose prefix=" "/>
+                </data>
+                <data source="711??.d">
+                    <compose prefix=" "/>
+                </data>
+                <data source="711??.e">
+                    <regexp match="(.*[^\.$])" format="${1}"/>
+                    <compose prefix=". "/>
+                </data>
+                <data source="711??.n">
+                    <compose prefix=" "/>
+                </data>
+            </concat>
+            <call-macro name="gnd" gndfield="711??.0"/>
+
+        </entity>
+
+    </rules>
+
+</metamorph>

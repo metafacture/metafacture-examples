@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <vars>
+        <var name="swissbib_domain" value="http://data.swissbib.ch/bibliographicResource/"/>
+    </vars>
+
+    <rules>
+
+        <!--RECURSION-->
+
+        <data source="001" name="@idnr"/>
+
+        <combine name="@key_item"
+                 value="${id_record}##${system_number}##${id_network}##${shelfmark1}##${shelfmark2}##${sublocation}##${description}##${barcode}##${posNumber}"
+                 flushWith="949??">
+            <data source="001" name="id_record"/>
+            <data source="949??.E" name="system_number"/>
+            <data source="949??.B" name="id_network"/>
+            <data source="949??.j" name="shelfmark1"/>
+            <data source="949??.s" name="shelfmark2"/>
+            <data source="949??.b" name="sublocation"/>
+            <data source="949??.z" name="description"/>
+            <data source="949??.p" name="barcode"/>
+            <data source="949??.B" name="posNumber">
+                <count/>
+            </data>
+            <postprocess>
+                <java class="org.swissbib.linked.mf.morph.functions.ItemHash"/>
+            </postprocess>
+            <!--The elements composing the IRI of the item are:
+                - record id (001)
+                - system number of the item (949$E)
+                - library network (949$B)
+                - shelfmark 1+2 (949$j + 949$s)
+                - sublocation (949$b)
+                - description (949$z)
+                - barcode (949$p)
+                - position of the field 949$B in the MARC record
+            -->
+        </combine>
+
+        <!--ITEM-->
+
+        <entity name="--" flushWith="949??">
+
+            <!--ID OF THE ITEM-->
+
+            <combine name="@id" value="http://data.swissbib.ch/item/${network}-${item_id}" flushWith="949??"
+                     sameEntity="true">
+                <data source="@key_item" name="item_id"/>
+                <data source="949??.B" name="network"/>
+            </combine>
+
+            <combine name="_id" value="${network}-${item_id}" flushWith="949??" sameEntity="true">
+                <data source="@key_item" name="item_id"/>
+                <data source="949??.B" name="network"/>
+            </combine>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="_id" name="@type">
+                <constant value="http://bibframe.org/vocab/HeldItem"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="_id" name="@context">
+                <constant value="https://resources.swissbib.ch/item/context.jsonld"/>
+            </data>
+
+            <!--LINK WITH BILIOGRAPHICAL RESOURCE-->
+
+            <combine name="bf:holdingFor" value="http://data.swissbib.ch/bibliographicResource/${id_record}"
+                     flushWith="949??">
+                <data source="@idnr" name="id_record"/>
+            </combine>
+
+            <!--LINK TO ITEM IN THE LOCAL LIBRARY INTERFACE-->
+
+            <combine name="foaf:page" value="${949B}##${949b}##${949F}##${949E}##${idnr}##${035Ids}" flushWith="949??">
+
+                <concat name="035Ids" delimiter="!!" flushWith="035??" reset="false">
+                    <data source="035??.a"/>
+                </concat>
+
+                <data source="949??.B" name="949B"/> <!-- network e.g. IDSBB / NEBIS etc-->
+                <data source="949??.b" name="949b"/> <!-- institution code eg. A100 UB Basel -->
+                <data source="949??.F"
+                      name="949F"/> <!-- institution_chb special value created because of organizational reasons we shouldn't take care at the moment-->
+                <data source="949??.E" name="949E"/> <!--bibsysnumber -->
+                <data source="@idnr" name="idnr"/> <!-- swissbib record id used -->
+                <data source="@035Ids" name="035Ids"/> <!-- bib system numbers -->
+
+                <postprocess>
+                    <java class="org.swissbib.linked.mf.morph.functions.ItemLink"/>
+                </postprocess>
+            </combine>
+
+            <!--SHELFMARK-->
+
+            <concat name="bibo:locator" delimiter="" flushWith="949??" reset="true">
+                <data source="949??.j"/>
+                <data source="949??.s">
+                    <compose prefix=" "/>
+                </data>
+            </concat>
+
+            <!--LIBRARY-->
+            <combine name="bibo:owner" value="http://data.swissbib.ch/organisation/${network}${library_id}"
+                     flushWith="949??">
+                <data source="949??.b" name="library_id">
+                    <blacklist>
+                        <!--Doesn't consider the REPO libraries for this part, because their URI consist of one part only:-->
+                        <entry name="BORIS"/>
+                        <entry name="ECOD"/>
+                        <entry name="RETROS"/>
+                        <entry name="SERVAL"/>
+                        <entry name="ZORA"/>
+                    </blacklist>
+                    <compose prefix="-"/>
+                </data>
+                <data source="949??.B" name="network"/>
+            </combine>
+
+            <!--SUBLOCATION WITHIN THE LIBRARY-->
+            <data source="949??.1" name="bf:subLocation"/>
+
+        </entity>
+
+    </rules>
+
+
+</metamorph>
