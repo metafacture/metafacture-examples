@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <rules>
+
+        <data source="http://www.w3.org/1999/02/22-rdf-syntax-ns#type">
+            <equals string="http://xmlns.com/foaf/0.1/Person"/>
+        </data>
+
+    </rules>
+
+</metamorph>

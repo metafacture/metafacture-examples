@@ -1,0 +1,22 @@
+<http://data.swissbib.ch/organisation/6c25e50c-5871-33c4-831a-680ad72e3bf1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Organization> .
+<http://data.swissbib.ch/organisation/6c25e50c-5871-33c4-831a-680ad72e3bf1> <http://www.w3.org/2000/01/rdf-schema#label> "Robert Bosch GmbH. Gesch\u00E4ftsbereich Automationstechnik" .
+<http://data.swissbib.ch/organisation/6c25e50c-5871-33c4-831a-680ad72e3bf1> <http://www.w3.org/2002/07/owl#sameAs> <http://d-nb.info/gnd/2167402-4> .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://dbpedia.org/ontology/birthYear> "1951"^^<http://www.w3.org/2001/XMLSchema#gYear> .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://www.w3.org/2000/01/rdf-schema#label> "Brock, George, 1951-" .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://www.w3.org/2002/07/owl#sameAs> <http://d-nb.info/gnd/1050799135> .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://xmlns.com/foaf/0.1/firstName> "George" .
+<http://data.swissbib.ch/person/11732d30-206d-376f-b966-ee7691b4dedd> <http://xmlns.com/foaf/0.1/lastName> "Brock" .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://dbpedia.org/ontology/birthYear> "1945"^^<http://www.w3.org/2001/XMLSchema#gYear> .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://www.w3.org/2000/01/rdf-schema#label> "Miceli, Sergio, 1945-" .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://www.w3.org/2002/07/owl#sameAs> <http://d-nb.info/gnd/1048747654> .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://xmlns.com/foaf/0.1/firstName> "Sergio" .
+<http://data.swissbib.ch/person/18870d8d-0078-379d-8309-11fe4dff9d85> <http://xmlns.com/foaf/0.1/lastName> "Miceli" .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://dbpedia.org/ontology/birthYear> "1922"^^<http://www.w3.org/2001/XMLSchema#gYear> .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://dbpedia.org/ontology/deathYear> "2012"^^<http://www.w3.org/2001/XMLSchema#gYear> .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://xmlns.com/foaf/0.1/Person> .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://www.w3.org/2000/01/rdf-schema#label> "Kallmann, Helmut, 1922-2012" .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://www.w3.org/2002/07/owl#sameAs> <http://d-nb.info/gnd/118923056> .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://xmlns.com/foaf/0.1/firstName> "Helmut" .
+<http://data.swissbib.ch/person/2053d2b6-6e9d-34ba-bcc6-ee7b87fe4829> <http://xmlns.com/foaf/0.1/lastName> "Kallmann" .
