@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <rules>
+
+        <entity name="--" flushWith="record">
+
+            <data name="@id" source="_id"/>
+            <data name="@context" source="_id">
+                <constant value="https://resources.swissbib.ch/work/context.jsonld"/>
+            </data>
+            <data name="@type" source="_id">
+                <constant value="http://bibframe.org/vocab/Work"/>
+            </data>
+            <data name="bf:hasInstance" source="instance"/>
+            <data name="dct:contributor" source="contributor0"/>
+            <data name="dct:contributor" source="contributor1"/>
+            <data name="dct:title" source="title"/>
+
+        </entity>
+
+    </rules>
+
+    <maps/>
+
+</metamorph>
