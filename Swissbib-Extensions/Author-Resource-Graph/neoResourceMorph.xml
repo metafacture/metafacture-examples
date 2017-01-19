@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <rules>
+        <data name="_id" source="001"/>
+        <concat name="sysno" delimiter=";" prefix="'" postfix="'">
+            <data source="035  .a" name="sysno">
+                <regexp match="\((.*)\)(.*)" format="${1}/${2}"/>
+                <replace pattern="'" with="\\'"/>
+                <unique part="value"/>
+            </data>
+        </concat>
+    </rules>
+
+</metamorph>

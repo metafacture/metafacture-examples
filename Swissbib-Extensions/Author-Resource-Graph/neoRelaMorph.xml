@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash100.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash700.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash710.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash711.xml" parse="xml"/>
+
+    <rules>
+        <data name="_id" source="001"/>
+        <data name="c" source="@key1000"/>
+        <data name="c" source="@key1001"/>
+        <data name="c" source="@key7000"/>
+        <data name="c" source="@key7001"/>
+        <data name="c" source="@key710"/>
+        <data name="c" source="@key711"/>
+    </rules>
+
+</metamorph>
