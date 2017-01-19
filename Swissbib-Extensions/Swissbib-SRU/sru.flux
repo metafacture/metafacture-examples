@@ -2,7 +2,4 @@
 open-multi-http(lowerBound="0", upperBound="50", chunkSize="20")|
 decode-xml|
 handle-marcxml-sb|
-//change-id("001")|
-//stream-to-triples(redirect="true")|
-//template("\"${s}\",\"${p}\",\"${o}\"")|
 write-csv(path=FLUX_DIR, linesPerFile="1000000", continuousFile="true", filetype="csv", filenamePrefix="sb");
