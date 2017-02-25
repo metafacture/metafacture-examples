@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <vars>
+        <var name="swissbib_domain" value="http://data.swissbib.ch/resource/"/>
+    </vars>
+
+    <macros>
+        <macro name="gnd">
+            <combine name="owl:sameAs" value="${prefix}${id}" sameEntity="true" reset="true" flushWith="$[gndfield]">
+                <if>
+                    <data source="$[gndfield]">
+                        <regexp match="\(DE-588\)[^ ]+"/>
+                    </data>
+                </if>
+                <data source="$[gndfield]" name="prefix">
+                    <constant value="http://d-nb.info/gnd/"/>
+                </data>
+                <data source="$[gndfield]" name="id">
+                    <regexp match="\(DE-588\) *([^ ]+)" format="${1}"/>
+                </data>
+            </combine>
+        </macro>
+    </macros>
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash100.xml" parse="xml"/>
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash700.xml" parse="xml"/>
+
+    <rules>
+
+        <!--BUILD THE BASIS RECORD -->
+
+        <!--100 first indicator 0-->
+        <entity name="--" flushWith="1000 ">
+            <data name="_id" source="@key1000"/>
+            <data name="@id" source="@key1000">
+                <compose prefix="http://data.swissbib.ch/person/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="1000 " name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Person"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="1000 " name="@context">
+                <constant value="https://resources.swissbib.ch/person/context.jsonld"/>
+            </data>
+
+            <combine name="rdfs:label" value="${name}${number}${developed}${dates}${note}" flushWith="1000 "
+                     sameEntity="true">
+                <data source="1000 .a" name="name"/>
+                <data source="1000 .b" name="number">
+                    <compose prefix=" "/>
+                </data>
+                <data source="1000 .q" name="developed">
+                    <compose prefix=" (" postfix=")"/>
+                </data>
+                <data source="1000 .d" name="dates">
+                    <compose prefix=", "/>
+                </data>
+                <data source="1000 .c" name="note">
+                    <compose prefix=", "/>
+                </data>
+            </combine>
+            <data source="1000 .d" name="dbp:birthYear">
+                <regexp match="(\d\d\d\d).?[-]" format="${1}"/>
+            </data>
+            <data source="1000 .d" name="dbp:deathYear">
+                <regexp match="(\d\d\d\d)$" format="${1}"/>
+            </data>
+            <data source="1000 .a" name="foaf:name"/>
+            <data source="1000 .c" name="skos:note"/>
+            <call-macro name="gnd" gndfield="1000 .0"/>
+        </entity>
+
+        <!--100 first indicator 1-->
+        <entity name="--" flushWith="1001 ">
+            <data name="_id" source="@key1001"/>
+            <data name="@id" source="@key1001">
+                <compose prefix="http://data.swissbib.ch/person/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="1001 " name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Person"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="1001 " name="@context">
+                <constant value="https://resources.swissbib.ch/person/context.jsonld"/>
+            </data>
+
+            <combine name="rdfs:label" value="${lastname}${firstname}${number}${developed}${dates}${note}"
+                     flushWith="1001 " sameEntity="true">
+                <data source="1001 .a" name="lastname"/>
+                <data source="1001 .D" name="firstname">
+                    <compose prefix=", "/>
+                </data>
+                <data source="1001 .b" name="number">
+                    <compose prefix=" "/>
+                </data>
+                <data source="1001 .q" name="developed">
+                    <compose prefix=" (" postfix=")"/>
+                </data>
+                <data source="1001 .d" name="dates">
+                    <compose prefix=", "/>
+                </data>
+                <data source="1001 .c" name="note">
+                    <compose prefix=", "/>
+                </data>
+            </combine>
+            <data source="1001 .d" name="dbp:birthYear">
+                <regexp match="(\d\d\d\d).?[-]" format="${1}"/>
+            </data>
+            <data source="1001 .d" name="dbp:deathYear">
+                <regexp match="(\d\d\d\d)$" format="${1}"/>
+            </data>
+            <data source="1001 .a" name="foaf:lastName"/>
+            <data source="1001 .D" name="foaf:firstName"/>
+            <data source="1001 .c" name="skos:note"/>
+            <call-macro name="gnd" gndfield="1001 .0"/>
+        </entity>
+
+        <!--700 first indicator 0-->
+        <entity name="--" flushWith="7000 ">
+            <data name="_id" source="@key7000"/>
+            <data name="@id" source="@key7000">
+                <compose prefix="http://data.swissbib.ch/person/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="7000 " name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Person"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="7000 " name="@context">
+                <constant value="https://resources.swissbib.ch/person/context.jsonld"/>
+            </data>
+
+            <combine name="rdfs:label" value="${name}${number}${developed}${dates}${note}" flushWith="7000 "
+                     sameEntity="true">
+                <data source="7000 .a" name="name"/>
+                <data source="7000 .b" name="number">
+                    <compose prefix=" "/>
+                </data>
+                <data source="7000 .q" name="developed">
+                    <compose prefix=" (" postfix=")"/>
+                </data>
+                <data source="7000 .d" name="dates">
+                    <compose prefix=", "/>
+                </data>
+                <data source="7000 .c" name="note">
+                    <compose prefix=", "/>
+                </data>
+            </combine>
+            <data source="7000 .d" name="dbp:birthYear">
+                <regexp match="(\d\d\d\d).?[-]" format="${1}"/>
+            </data>
+            <data source="7000 .d" name="dbp:deathYear">
+                <regexp match="(\d\d\d\d)$" format="${1}"/>
+            </data>
+            <data source="7000 .a" name="foaf:name"/>
+            <data source="7000 .c" name="skos:note"/>
+            <call-macro name="gnd" gndfield="7000 .0"/>
+        </entity>
+
+        <!--700 first indicator 1-->
+        <entity name="--" flushWith="7001 ">
+            <data name="_id" source="@key7001"/>
+            <data name="@id" source="@key7001">
+                <compose prefix="http://data.swissbib.ch/person/"/>
+            </data>
+
+            <!--RDF TYPE (CLASS)-->
+
+            <data source="7001 " name="@type">
+                <constant value="http://xmlns.com/foaf/0.1/Person"/>
+            </data>
+
+            <!--REFERENCED JSON-LD CONTEXT-->
+            <data source="7001 " name="@context">
+                <constant value="https://resources.swissbib.ch/person/context.jsonld"/>
+            </data>
+
+            <combine name="rdfs:label" value="${lastname}${firstname}${number}${developed}${dates}${note}"
+                     flushWith="7001 " sameEntity="true">
+                <data source="7001 .a" name="lastname"/>
+                <data source="7001 .D" name="firstname">
+                    <compose prefix=", "/>
+                </data>
+                <data source="7001 .b" name="number">
+                    <compose prefix=" "/>
+                </data>
+                <data source="7001 .q" name="developed">
+                    <compose prefix=" (" postfix=")"/>
+                </data>
+                <data source="7001 .d" name="dates">
+                    <compose prefix=", "/>
+                </data>
+                <data source="7001 .c" name="note">
+                    <compose prefix=", "/>
+                </data>
+            </combine>
+            <data source="7001 .d" name="dbp:birthYear">
+                <regexp match="(\d\d\d\d).?[-]" format="${1}"/>
+            </data>
+            <data source="7001 .d" name="dbp:deathYear">
+                <regexp match="(\d\d\d\d)$" format="${1}"/>
+            </data>
+            <data source="7001 .a" name="foaf:lastName"/>
+            <data source="7001 .D" name="foaf:firstName"/>
+            <data source="7001 .c" name="skos:note"/>
+            <call-macro name="gnd" gndfield="7001 .0"/>
+        </entity>
+
+    </rules>
+
+</metamorph>

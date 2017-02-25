@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<metamorph xmlns="http://www.culturegraph.org/metamorph" version="1">
+
+    <include xmlns="http://www.w3.org/2001/XInclude" href="morphModules/authorHash100.xml" parse="xml"/>
+
+    <rules>
+
+        <!--SUBJECT OF THE WORK-->
+        <data source="986  .b" name="_id">
+            <compose prefix="http://data.swissbib.ch/work/"/>
+        </data>
+
+        <!--001 RELATED RESOURCES/MANIFESTATIONS-->
+        <data source="001" name="instance">
+            <compose prefix="http://data.swissbib.ch/bibliographicResource/"/>
+        </data>
+
+        <!--100 MAIN AUTHOR-->
+        <data name="contributor0" source="@key1000">
+            <compose prefix="http://data.swissbib.ch/person/"/>
+        </data>
+        <data name="contributor1" source="@key1001">
+            <compose prefix="http://data.swissbib.ch/person/"/>
+        </data>
+
+        <!--245 TITLE-->
+        <concat name="title" delimiter="">
+            <data source="245*.a"/>
+            <data source="245*.b">
+                <compose prefix=" : "/>
+            </data>
+            <data source="245*.c">
+                <compose prefix=" / "/>
+            </data>
+            <data source="245*.n">
+                <compose prefix=". "/>
+            </data>
+            <data source="245*.p">
+                <compose prefix=". "/>
+            </data>
+        </concat>
+
+    </rules>
+
+    <maps/>
+
+</metamorph>
