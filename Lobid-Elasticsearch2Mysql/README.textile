@@ -1,0 +1,35 @@
+This is a complex flux residing in the "lobid/lodmill repo":https://github.com/lobid/lodmill/blob/master/lodmill-rd/src/main/resources/hbz01ES-to-lobid.flux .
+
+h2. What it does
+
+This flux demonstrates the ETL (Extract,Transformation,Load) capacity of metafacture:
+
+1. As data source an elasticsearch index is _extracted_
+2. The data (serialized in AlephMabXml) is _transformed_ using a morph-script into NTriples
+3. These NTriples are _loaded_ into a Mysql DB
+
+The flux with its tee-pipes does some more stuff in parallel:
+
+- serializing the elasticserach stream into one big xml gzipped file
+- creating a statistic about the field occurrences of the morphed data
+
+h2. Where is the java class the the flux commands point to?
+
+As always, look into the "flux-commands.properties":https://github.com/lobid/lodmill/blob/master/lodmill-rd/src/main/resources/flux-commands.properties.
+
+h2. How to execute
+
+For now it will only work if the lobid repository is checked out and the directory "lodmill-rd":https://github.com/lobid/lodmill/tree/master/lodmill-rd is built.
+
+h2. Careful
+
+Be aware that the used modules are not the official way to work with triples and
+that especially "write-rdfmodel-mysql":https://github.com/lobid/lodmill/blob/master/lodmill-rd/src/main/java/org/lobid/lodmill/RdfModelMysqlWriter.java is kind of a workaround (as one limit of metamorph
+is that receiving modules can pass only _one_ kind of value. This might be a
+complex object, though (here it's an jena RDF model), so, since the receiver
+also needs a way to determine the name of the record to store to, the property
+to obtain that name from is given via the parameter
+_property="http://purl.org/lobid/lv#hbzID"_ .This property is then used by the
+module to extract the name of the record (the key) out of the jena RDF model to
+store it into the MySql db)).  Albeit it's kind of a workaround: its working
+and might give you a clue how to do that stuff if you are in need of it.
