@@ -12,7 +12,7 @@
 //  curl -XPOST --header 'Content-Type: application/x-ndjson' -d @bulk.ndjson 'http://localhost:9200/_bulk'
 
 default outfile = "bulk.ndjson";
-default infile = FLUX_DIR + "aggregate_auslieferung_20191212.small.marcxml";
+default infile = FLUX_DIR + "aggregate_auslieferung_20191212.small.marcxml.gz";
 default morphfile = FLUX_DIR + "morph-cg-to-es.xml";
 
 
