@@ -20,7 +20,7 @@ The parameter after `flux.sh` (the flux file) can be the path to the flux file, 
 flux from this repo. Just make sure that the files used in the flux (input, morph)
 reside in the same directory as the flux itself (as it is in this repo).
 
-Get the (full aggregate data dump)[https://culturegraph:guhusu@data.dnb.de/aggregate_auslieferung_20191212.marcxml.gz] (~7GB), adjust the path in the morph.
+Get the [full aggregate data dump](https://culturegraph:guhusu@data.dnb.de/aggregate_auslieferung_20191212.marcxml.gz) (~7GB), adjust the path in the morph.
 
 # Index
 _This shall work for all elasticsearch versions <8.0 where the "index-type" setting is still valid._
