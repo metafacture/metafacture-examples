@@ -29,7 +29,7 @@ The generated `bulk.ndjson` looks like this:
 
 > {"index":{"_index":"cgrvk","_type":"rvk"}}
 
-> {"rvk":["CI 1100","5,1"],"hbzId":"HT018839495, HT018625006"}
+> {"rvk":["CI 1125","CI 5604","CI 5603","IH 34381","CI 1100","CI 5310","EC 2430"],"id":"HT013166356, HT018625006, TT000577460"}
 
 This is elasticsearch's bulk format, where the odd-numbered lines are the index'
 metadata and the following even-numbered the actual data to be indexed.
@@ -44,7 +44,7 @@ culturegraph's complete aggregate data.
 
 Test-query:
 ```bash
-curl 'localhost:9200/cgrvk/_search?q=hbzId:HT018625006&pretty=true'
+curl 'localhost:9200/cgrvk/_search?q=id:HT018625006&pretty=true'
 ```
 
 # Enrichment
