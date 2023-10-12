@@ -11,22 +11,17 @@
 //
 //  curl -XPOST --header 'Content-Type: application/x-ndjson' -d @bulk.ndjson 'http://localhost:9200/_bulk'
 
-default outfile = "bulk.ndjson";
+default outfile = FLUX_DIR + "bulk.ndjson";
 default infile = FLUX_DIR + "aggregate_auslieferung_20191212.small.marcxml.gz";
-default morphfile = FLUX_DIR + "morph-cg-to-es.xml";
+default fixfile = FLUX_DIR + "fix-cg-to-es.fix";
 
 
-infile|
-open-file|
-decode-xml|
-split-xml-elements(topLevelElement="marc:collection",elementName="record")|
-literal-to-object|
-read-string|
-decode-xml|
-handle-marcxml|
-filter(morphfile)|
-morph(morphfile)|
-encode-json|
-json-to-elasticsearch-bulk(type="rvk", index="cgrvk")|
-write(outfile);
-
+infile
+| open-file
+| decode-xml
+| handle-marcxml
+| fix(fixfile)
+| encode-json
+| json-to-elasticsearch-bulk(type="rvk", index="cgrvk")
+| write(outfile)
+;
