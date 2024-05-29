@@ -1,3 +1,4 @@
+add_field("id","")
 set_array("@id")
 set_array("rvk[]")
 
@@ -14,8 +15,9 @@ do list(path: "035??", "var": "$i")
 end
 replace_all("@id.*","^\\(DE-605\\)(.*)","$1")
 join_field("@id",", ")
+move_field("@id","id")
 
-retain("rvk[]","@id")
+retain("rvk[]","id")
 vacuum()
 
 # Filter records without RVK
@@ -24,7 +26,7 @@ unless exists("rvk[]")
 end
 
 # Filter records without hbz @ids
-unless exists("@id")
+unless exists("id")
     reject()
 end
 
