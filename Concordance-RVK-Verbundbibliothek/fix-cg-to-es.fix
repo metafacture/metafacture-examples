@@ -1,5 +1,4 @@
-add_field("id","")
-set_array("@id")
+set_array("id")
 set_array("rvk[]")
 
 do list(path: "084??", "var": "$i")
@@ -8,14 +7,14 @@ do list(path: "084??", "var": "$i")
     end
 end
 
+
 do list(path: "035??", "var": "$i")
     if any_match("$i.a", "^\\(DE-605\\)(.*)")
-        copy_field("$i.a","@id.$append")
+        copy_field("$i.a","id.$append")
     end
 end
-replace_all("@id.*","^\\(DE-605\\)(.*)","$1")
-join_field("@id",", ")
-move_field("@id","id")
+replace_all("id.*","^\\(DE-605\\)(.*)","$1")
+join_field("id",", ")
 
 retain("rvk[]","id")
 vacuum()
@@ -25,7 +24,7 @@ unless exists("rvk[]")
     reject()
 end
 
-# Filter records without hbz @ids
+# Filter records without hbz ids
 unless exists("id")
     reject()
 end
