@@ -11,7 +11,7 @@
 //
 //  curl -XPOST --header 'Content-Type: application/x-ndjson' -d @bulk.ndjson 'http://localhost:9200/_bulk'
 
-default outfile = FLUX_DIR + "bulk.json";
+default outfile = FLUX_DIR + "bulk.csv";
 default infile = FLUX_DIR + "aggregate_auslieferung_20191212.small.marcxml.gz";
 default fixfile = FLUX_DIR + "fix-cg-to-es.fix";
 
@@ -21,7 +21,8 @@ infile
 | decode-xml
 | handle-marcxml
 | fix(fixfile)
+| encode-json
+| decode-json(recordPath="records")
 | encode-csv
-//encode-json
 | write(outfile)
 ;
