@@ -1,14 +1,15 @@
 set_array("records[]")
 set_array("@id[]")
-set_array("@rvk[]")
+set_array("@rvk")
 
 do list(path: "084??", "var": "$i")
     if any_match("$i.2", "rvk")
-        copy_field("$i.a","@rvk[].$append")
+        copy_field("$i.a","@rvk.$append")
     end
 end
 
-uniq("@rvk[]")
+uniq("@rvk")
+join_field("@rvk",",")
 
 
 do list(path: "035??", "var": "$i")
@@ -20,14 +21,14 @@ replace_all("id[].*","^\\(DE-605\\)(.*)","$1")
 
 do list(path: "@id[]", "var": "$i")
     copy_field("$i","records[].$append.id")
-    copy_field("@rvk[]","records[].$last.rvk[]")
+    copy_field("@rvk","records[].$last.rvk")
 end
 replace_all("records[].*.id","^\\(DE-605\\)(.*)","$1")
 
 vacuum()
 
 # Filter records without RVK
-unless exists("@rvk[]")
+unless exists("@rvk")
     reject()
 end
 
